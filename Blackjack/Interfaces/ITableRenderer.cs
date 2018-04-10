@@ -28,30 +28,47 @@ namespace Blackjack.Interfaces
         ITable Table { get; }
 
         /// <summary>
-        /// A rendering method that takes card data & uses it to generate
-        /// a graphical representation of the card
-        /// </summary>
-        /// <param name="card">The card that will generate a graphical 
-        /// representation</param>
-        void Render(ICard card);
-
-        /// <summary>
-        /// A rendering method that prints a series of chars to fill a single line.
-        /// Used to separate art from text in the console
-        /// </summary>
-        /// <param name="separator"></param>
-        void Render(Char border);
-
-        /// <summary>
-        /// A method for rendering ASCII
-        /// </summary>
-        /// <param name="graphic"></param>
-        void Render(int[,] graphic);
-
-        /// <summary>
         /// Our main rendering method, for drawing the player's cards and points
         /// </summary>
         /// <param name="player"></param>
         void RenderHandAndPoints(IPlayer player);
+
+        /// <summary>
+        /// Renders a 2-D string array -- "rendering" strings or 1-D arrays is for
+        /// The output provider
+        /// </summary>
+        /// <param name="graphic"></param>
+        void Render(string[,] graphic);
+
+        // Renderer helpers -- testable!
+
+        /// <summary>
+        /// A method that takes card data & uses it to generate
+        /// a graphical representation of the card
+        /// </summary>
+        /// <param name="card">The card that will generate a graphical 
+        /// representation</param>
+        /// <returns>A 2-D string array representing the card</returns>
+        String[,] Generate(ICard card);
+
+        /// <summary>
+        /// A method that generates a series of chars to fill a single line.
+        /// Used to separate art from text in the console
+        /// </summary>
+        /// <param name="border">The char used to fill the line
+        /// Example: 
+        /// Pass in *
+        /// Get out ********************************************************************
+        /// </param>
+        /// <returns>A string representing the separator</returns>
+        String Generate(Char border);
+
+        /// <summary>
+        /// A general method for rendering ASCII
+        /// </summary>
+        /// <param name="graphic">A 2-D array representing the graphic</param>
+        /// <returns>A colored 2-D string array representing the graphic</returns>
+        String[,] Generate(int[,] graphic);
+
     }
 }
