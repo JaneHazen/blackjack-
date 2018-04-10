@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace Blackjack.Interfaces
 {
-    enum CardSuit
+
+    public enum CardSuit
     {
         Heart,
         Diamond,
         Club, 
         Spade
     }
-    interface ICard
+
+
+    public interface ICard
+
     {
        /// <summary>
        /// The suit of the card
