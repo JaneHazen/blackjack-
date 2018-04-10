@@ -6,7 +6,7 @@ using Blackjack.Interfaces;
 namespace Blackjack.Tests
 {
     [TestClass]
-    public class GraphicTests
+    public class GraphicTest
     {
         Graphic Pic;
 
