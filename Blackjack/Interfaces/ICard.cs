@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blackjack.Interfaces
 {
-    interface ICard
+    public interface ICard
     {
        /// <summary>
        /// The suit of the card

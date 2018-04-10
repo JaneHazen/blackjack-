@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Blackjack.Interfaces
 {
     //contains the player(or dealer)s' cards
-    interface IHand
+    public interface IHand
     {
         // initiates a list of cards (preferably two?) that will compromise the player's hand
         List<ICard> Hand { get; set; }
