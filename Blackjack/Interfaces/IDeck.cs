@@ -9,7 +9,7 @@ namespace Blackjack.Interfaces
     /// <summary>
     ///  A 52-card deck
     /// </summary>
-    interface IDeck
+    public interface IDeck
     {
        /// <summary>
        ///  All the cards in the deck

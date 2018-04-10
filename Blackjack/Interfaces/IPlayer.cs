@@ -9,7 +9,7 @@ namespace Blackjack.Interfaces
       /// <summary>
       ///  Represents a player or other participant
       /// </summary>
-    interface IPlayer
+    public interface IPlayer
     {   
         /// <summary>
         ///  The player's name
