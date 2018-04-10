@@ -12,14 +12,14 @@ namespace Blackjack
     public enum Color
     {
         Black = 0,
-        Gray = 1,
-        White = 2,
-        Purple = 3,
-        Blue = 4,
-        Cyan = 5,
-        Green = 6,
-        Yellow = 7,
-        Orange = 8,
-        Red = 9
+        White = 1,
+        Purple = 2,
+        Blue = 3,
+        Green = 4,
+        Yellow = 5,
+        Orange = 6,
+        Red = 7,
+        Gray = 8,
+        Transparent = 9
     }
 }
