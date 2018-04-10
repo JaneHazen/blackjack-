@@ -11,7 +11,11 @@ namespace Blackjack.Interfaces
     {
         // initiates a list of cards (preferably two?) that will compromise the player's hand
         List<ICard> Hand { get; set; }
-        // loops through the hand to display each card
-        void DisplayHand();
+        // loops through the hand to return all cards in the hand
+        void GetFullHand();
+        // adds a card to the hand
+        void AddCard(ICard card);
+        // plays the a card from the hand
+        void PlayCard();
     }
 }
