@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Blackjack.Interfaces
 {
-    interface IInputProvider
+    interface IGraphic
     {
         /// <summary>
-        /// Reads string input from the user
+        /// A 2-D array showing which colors/chars go where
+        /// Limited to 10 distinct values
         /// </summary>
-        /// <param name="text">The </param>
-        void Read(String text);
+        int[,] Bitmap { get; }
     }
 }

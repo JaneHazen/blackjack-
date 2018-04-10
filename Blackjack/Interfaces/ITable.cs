@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Blackjack.Interfaces
 {
+    /// <summary>
+    /// A representation of the players, cards, and points
+    /// for the current round.
+    /// 
+    /// Used chiefly by the renderer
+    /// </summary>
     interface ITable
     {
         /// <summary>
