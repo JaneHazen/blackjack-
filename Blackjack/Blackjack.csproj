@@ -43,6 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IHand.cs" />
+    <Compile Include="Interfaces\IInputProvider.cs" />
+    <Compile Include="Interfaces\IOutputProvider.cs" />
+    <Compile Include="Interfaces\ITable.cs" />
+    <Compile Include="Interfaces\ITableRenderer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
