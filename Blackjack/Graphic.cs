@@ -13,9 +13,9 @@ namespace Blackjack
     public class Graphic : IGraphic
     {
         /// <summary>
-        /// A 'map' of the colors and/or characters in the image
-        /// Limited to 10 distinct values
-        /// In practice, will use Color enum
+        /// A 'map' of the colors and/or characters in the image.
+        /// Limited to 10 distinct values.
+        /// Can use the Color enum if you cast the Color to an int (see Example 3).
         /// 
         /// Example 1:
         /// 
@@ -40,10 +40,18 @@ namespace Blackjack
         /// 0202020202
         /// 1010101010
         /// 
-        /// A 10 x 10 square with a rainbow and black checkerboard
+        /// A 10 x 10 square with a rainbow and black checkerboard.
+        /// The 0's are black spots.
         /// From top to bottom: transparent(9), gray(8), red(7), orange(6), 
-        /// yellow(5), green(4), blue(3), purple(2), white(1)
-        /// The 0's are black
+        /// yellow(5), green(4), blue(3), purple(2), white(1).
+        /// 
+        /// Example 3:
+        /// 
+        /// { (int)Color.Red, (int)Color.Green, (int)Color.Blue }
+        /// 
+        /// An array containing Color enums, each of which is cast to an int.
+        /// Because enums have a number value, after the cast, the array contains
+        /// the ints 7, 4, 3...which represent the colors red, green, and blue.
         /// </summary>
         public int[][] Bitmap { get; }
 

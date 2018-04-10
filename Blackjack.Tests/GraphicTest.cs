@@ -13,7 +13,7 @@ namespace Blackjack.Tests
         [TestInitialize]
         public void Init()
         {
-            var line = new int[] { 7, 4, 3 };
+            var line = new int[] { (int)Color.Red, (int)Color.Green, (int)Color.Blue };
             var map = new int[3][];
 
             map[0] = line;
