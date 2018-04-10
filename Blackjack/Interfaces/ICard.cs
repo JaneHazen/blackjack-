@@ -24,7 +24,10 @@ namespace Blackjack.Interfaces
        /// </summary>
         CardSuit Suit { get; set; }
       
-
+        /// <summary>
+        /// The Name of the Class
+        /// </summary>
+        string Name { get; set; }
         /// <summary>
         /// The Value of the card
         /// </summary>
@@ -34,7 +37,6 @@ namespace Blackjack.Interfaces
         /// Reveals if the card is face Up or Down
         /// </summary>
         bool IsHidden { get; set; }
-
 
         /// <summary>
         /// It Override the ToSting() and returns the value and suit of each card
