@@ -25,8 +25,8 @@ namespace Blackjack.Interfaces
         /// <summary>
        ///  Check if card deck has cards
        /// </summary>
-       void Empty();
-
+       bool isEmpty();
+    
         /// <summary>
        /// Shuffle the deck
        /// </summary>
