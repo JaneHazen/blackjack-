@@ -68,7 +68,7 @@ namespace Blackjack.Interfaces
         /// </summary>
         /// <param name="graphic">A 2-D array representing the graphic</param>
         /// <returns>A colored 2-D string array representing the graphic</returns>
-        String[,] Generate(int[,] graphic);
+        String[,] Generate(int[][] graphic);
 
     }
 }

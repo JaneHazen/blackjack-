@@ -24,6 +24,6 @@ namespace Blackjack.Interfaces
         /// 
         /// A white 6x6 square with a black border
         /// </summary>
-        int[,] Bitmap { get; }
+        int[][] Bitmap { get; }
     }
 }

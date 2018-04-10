@@ -37,13 +37,34 @@ namespace Blackjack
         /// 0202020202
         /// 1010101010
         /// 
-        /// A 10 x 10 square with a rainbow checkerboard
+        /// A 10 x 10 square with a rainbow and black checkerboard
         /// From top to bottom: red(9), orange(8), yellow(7), green(6), 
         /// cyan/turquoise(5), blue(4), red(3), white(2), gray(1)
+        /// The 0's are black
         /// </summary>
-        public int[,] Bitmap { get; }
+        public int[][] Bitmap { get; }
 
-        public Graphic(int[,] array)
+        /// <summary>
+        /// Go through the graphic's bitmap and convert everything to colors
+        /// </summary>
+        /// <returns>An array of arrays containing colors</returns>
+        public Color[][] Colorize()
+        {
+            var map = this.Bitmap;
+            var coloredMap = new Color[map.Length][];
+
+            for (int index = 0; index < map.Length; index++)
+            {
+                var array = map[index];
+                var coloredLine = array.Select(colorValue => (Color)colorValue);
+
+                coloredMap[index] = coloredLine.ToArray();
+            }
+
+            return coloredMap;
+        }
+
+        public Graphic(int[][] array)
         {
             Bitmap = array;
         }

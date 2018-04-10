@@ -9,7 +9,7 @@ namespace Blackjack
     /// <summary>
     /// A way of representing colors in our graphics, using ints 0 to 9
     /// </summary>
-    enum Color
+    public enum Color
     {
         Black = 0,
         Gray = 1,
