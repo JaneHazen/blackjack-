@@ -20,18 +20,21 @@ namespace Blackjack.Interfaces
         /// <summary>
        ///  Deal out the cards
        /// </summary>
-       //ICard Deal();
+       ICard Deal();
 
         /// <summary>
        ///  Check if card deck has cards
        /// </summary>
+       void Empty();
 
         /// <summary>
        /// Shuffle the deck
        /// </summary>
+       void Shuffle();
 
         /// <summary>
-       ///  Hand 
+       ///  Add a card to the deck
        /// </summary>
+       void Add(ICard card);
     }
 }

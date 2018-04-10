@@ -25,5 +25,7 @@ namespace Blackjack.Interfaces
        ///  The player's draw method to take cards from deck
        /// </summary>
        void Draw();//draw from Ideck)
+
+
     }
 }
