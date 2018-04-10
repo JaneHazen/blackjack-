@@ -51,25 +51,28 @@ namespace Blackjack
         /// Go through the graphic's bitmap and convert everything to colors
         /// </summary>
         /// <returns>An array of arrays containing colors</returns>
-        public Color[][] ColorMap()
+        public Color[][] ColorMap
         {
-            var map = this.Bitmap;
-            var coloredMap = new Color[map.Length][];
-
-            for (int index = 0; index < map.Length; index++)
+            get
             {
-                var array = map[index];
-                var coloredLine = array.Select(colorValue => (Color)colorValue);
+                var map = this.Bitmap;
+                var coloredMap = new Color[map.Length][];
 
-                coloredMap[index] = coloredLine.ToArray();
+                for (int index = 0; index < map.Length; index++)
+                {
+                    var array = map[index];
+                    var coloredLine = array.Select(colorValue => (Color)colorValue);
+
+                    coloredMap[index] = coloredLine.ToArray();
+                }
+
+                return coloredMap;
             }
-
-            return coloredMap;
         }
 
-        public Graphic(int[][] array)
+        public Graphic(int[][] bitmap)
         {
-            Bitmap = array;
+            Bitmap = bitmap;
         }
     }
 }

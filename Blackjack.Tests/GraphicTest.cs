@@ -34,7 +34,7 @@ namespace Blackjack.Tests
             expected[2] = colors;
 
             // act
-            var actual = Pic.ColorMap();
+            var actual = Pic.ColorMap;
 
             // assert
             CollectionAssert.AreEqual(expected[0], actual[0]);

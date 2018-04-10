@@ -64,6 +64,7 @@ namespace Blackjack
                 case Color.Transparent:
                     return Console.BackgroundColor;
                 default:
+                    // will never actually run, but the compiler wants it
                     throw new ArgumentException("unknown color");
             }
         }
