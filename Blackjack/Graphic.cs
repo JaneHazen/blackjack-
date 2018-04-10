@@ -7,6 +7,9 @@ using Blackjack.Interfaces;
 
 namespace Blackjack
 {
+    /// <summary>
+    /// A representation of an image
+    /// </summary>
     public class Graphic : IGraphic
     {
         /// <summary>
@@ -38,8 +41,8 @@ namespace Blackjack
         /// 1010101010
         /// 
         /// A 10 x 10 square with a rainbow and black checkerboard
-        /// From top to bottom: red(9), orange(8), yellow(7), green(6), 
-        /// cyan/turquoise(5), blue(4), red(3), white(2), gray(1)
+        /// From top to bottom: transparent(9), gray(8), red(7), orange(6), 
+        /// yellow(5), green(4), blue(3), purple(2), white(1)
         /// The 0's are black
         /// </summary>
         public int[][] Bitmap { get; }
@@ -48,7 +51,7 @@ namespace Blackjack
         /// Go through the graphic's bitmap and convert everything to colors
         /// </summary>
         /// <returns>An array of arrays containing colors</returns>
-        public Color[][] Colorize()
+        public Color[][] ColorMap()
         {
             var map = this.Bitmap;
             var coloredMap = new Color[map.Length][];
