@@ -12,7 +12,7 @@ namespace Blackjack.Interfaces
     /// 
     /// Used chiefly by the renderer
     /// </summary>
-    interface ITable
+    public interface ITable
     {
         /// <summary>
         /// The human or AI players in the current round 

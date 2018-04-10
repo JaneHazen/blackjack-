@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blackjack.Interfaces
 {
-    interface IOutputProvider
+    public interface IOutputProvider
     {
         /// <summary>
         /// Writes the given string, without a new line
@@ -18,7 +18,7 @@ namespace Blackjack.Interfaces
         /// Write the output with a new line
         /// </summary>
         /// <param name="output"></param>
-        void WriteLine(string output);
+        void WriteLine(String text);
 
         /// <summary>
         /// Write an empty new line

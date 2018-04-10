@@ -20,7 +20,7 @@ namespace Blackjack.Interfaces
     ///     Loss art
     ///     Goodbye art
     ///     Separators between text
-    interface ITableRenderer
+    public interface ITableRenderer
     {
         /// <summary>
         /// The table to be rendered
