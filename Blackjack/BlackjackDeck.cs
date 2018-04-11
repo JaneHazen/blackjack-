@@ -55,11 +55,22 @@ namespace Blackjack
             return Cards.Count == 0;
         }
 
+        /// <summary>
+        /// Creates 52 cards and add them to the deck
+        /// </summary>
         private void AddAllCardsToDeck()
         {
             foreach(CardSuit suit in Enum.GetValues(typeof(CardSuit)))
             {
-                //foreach()
+                foreach(CardRank rank in Enum.GetValues(typeof(CardRank)))
+                {
+                    //I should skip acelow
+                    if (rank == CardRank.AceLow)
+                    {
+                        continue;
+                    }
+                    Add(new Card(suit , rank));
+                }
             
             }
         }

@@ -15,6 +15,23 @@ namespace Blackjack.Interfaces
         Spade
     }
 
+    public enum CardRank
+    {
+        AceLow = 1,
+        Two,
+        Three,
+        Four,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
+        Jack,
+        Queen,
+        King,
+        AceHigh
+    }
 
     public interface ICard
 
@@ -22,7 +39,12 @@ namespace Blackjack.Interfaces
        /// <summary>
        /// The suit of the card
        /// </summary>
-        CardSuit Suit { get; set; }
+       CardSuit Suit { get; set; }
+
+       /// <summary>
+       /// The rank of the cards, from ace to king
+       /// </summary>
+       CardRank Rank { get; set; }
       
         /// <summary>
         /// The Name of the Class
