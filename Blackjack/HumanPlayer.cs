@@ -19,18 +19,11 @@ namespace Blackjack
       
 
         /// <summary>
-        /// the hand interface, used to get the player's hand
+        /// The player's current set of cards
         /// </summary>
-        private IHand hand;
+        public List<IHand> Cards { get; set; }
 
-        /// <summary>
-        /// The player's hand
-        /// </summary>
-        public IHand Cards()
-        {
-            return this.hand;
-        }
-
+      
         /// <summary>
         /// Draw from the deck
         /// </summary>
@@ -49,10 +42,19 @@ namespace Blackjack
 
         }
 
-        public HumanPlayer(string name, IHand hand)
+        /// <summary>
+        /// Constructor for human player
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="hand"></param>
+        public HumanPlayer(string name)
         {
+            if (name == null || name == "")
+            {
+                throw new ArgumentNullException("player name");
+            }
             this.Name = name;
-            this.hand = hand;
+            this.Cards = new List<IHand>();
         }
 
 

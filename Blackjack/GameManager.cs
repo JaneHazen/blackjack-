@@ -36,5 +36,7 @@ namespace Blackjack.Interfaces
         {
             throw new NotImplementedException();
         }
+
+
     }
 }
