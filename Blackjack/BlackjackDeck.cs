@@ -18,6 +18,15 @@ namespace Blackjack
         public List<ICard> Cards { get; private set; }
 
         /// <summary>
+        /// Constructor which adds cards to deck
+        /// </summary>
+        /// <param name="cards"></param>
+        public BlackjackDeck(List<ICard> cards)
+        {
+            this.Cards = cards;
+        }
+
+        /// <summary>
         /// Adding cards to the deck
         /// </summary>
         /// <param name="card"></param>
@@ -44,6 +53,11 @@ namespace Blackjack
         public bool isEmpty()
         {
             return Cards.Count == 0;
+        }
+
+        private void AddAllCardsToDeck()
+        {
+
         }
             
 
