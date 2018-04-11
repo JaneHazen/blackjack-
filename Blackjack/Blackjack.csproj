@@ -42,11 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlackJackDeck.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="ConsoleInputProvider.cs" />
     <Compile Include="ConsoleOutputProvider.cs" />
     <Compile Include="ConsoleTableRenderer.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="Graphic.cs" />
     <Compile Include="Interfaces\ICard.cs" />
     <Compile Include="Interfaces\IDeck.cs" />

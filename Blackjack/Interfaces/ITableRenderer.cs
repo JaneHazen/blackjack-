@@ -25,7 +25,7 @@ namespace Blackjack.Interfaces
         /// <summary>
         /// The table to be rendered
         /// </summary>
-        ITable Table { get; }
+        ITable Table { get; set; }
 
         /// <summary>
         /// Our main rendering method, for drawing the player's cards and points
@@ -39,6 +39,11 @@ namespace Blackjack.Interfaces
         /// </summary>
         /// <param name="graphic"></param>
         void Render(string[,] graphic);
+
+        /// <summary>
+        /// Renders the table base on the Table properites
+        /// </summary>
+        void Render();
 
         // Renderer helpers -- testable!
 

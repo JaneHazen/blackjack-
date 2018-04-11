@@ -12,12 +12,12 @@ namespace Blackjack
         /// <summary>
         /// A list (or array (or listarray)) of the players
         /// </summary>
-        public IEnumerable<IPlayer> Players { get; }
+        public IEnumerable<IPlayer> Players { get; set; }
 
         /// <summary>
         /// The dealer. The one to beat.
         /// </summary>
-        public IPlayer Dealer { get; }
+        public IPlayer Dealer { get; set; }
 
         // methods for getting the hand
 
@@ -25,10 +25,16 @@ namespace Blackjack
 
         // methods for other info
 
+        public Table() :this(null, null)
+        {
+
+        }
+
         public Table(IEnumerable<IPlayer> players, IPlayer dealer)
         {
             Players = players;
             Dealer = dealer;
         }
+
     }
 }

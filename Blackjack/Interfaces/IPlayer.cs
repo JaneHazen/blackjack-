@@ -12,6 +12,10 @@ namespace Blackjack.Interfaces
     public interface IPlayer
     {   
         /// <summary>
+        ///  Use for tracking the game of the player
+        /// </summary>
+        GameState gameState { get; set; }
+        /// <summary>
         ///  The player's name
         /// </summary>
         string Name { get; set; }
@@ -19,12 +23,14 @@ namespace Blackjack.Interfaces
        /// <summary>
        ///  The player's hand
        /// </summary>
-       // List<IHand> Cards { get; set; }
+       List<IHand> Cards { get; set; }
 
          /// <summary>
        ///  The player's draw method to take cards from deck
        /// </summary>
        void Draw();//draw from Ideck)
+
+    
 
 
     }

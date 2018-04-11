@@ -9,7 +9,7 @@ namespace Blackjack
 {
     public class ConsoleTableRenderer: ITableRenderer
     {
-        public ITable Table { get; }
+        public ITable Table { get; set; }
 
         public string[,] Generate(ICard card)
         {
@@ -70,6 +70,11 @@ namespace Blackjack
         }
 
         public void Render(string[,] graphic)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Render()
         {
             throw new NotImplementedException();
         }
