@@ -81,7 +81,10 @@ namespace Blackjack
         /// <returns>The 80 character string</returns>
         public string Generate(char border)
         {
-        return String.Concat(Enumerable.Repeat(border, 80));
+            var length = Console.WindowWidth;
+            var horizontalRule = String.Concat(Enumerable.Repeat(border, length));
+
+            return horizontalRule;
         }
 
         public string[,] Generate(int[][] graphic)

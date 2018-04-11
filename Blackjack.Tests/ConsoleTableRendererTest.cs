@@ -53,18 +53,22 @@ namespace Blackjack.Tests
             Assert.AreEqual(expected7, actual7);
             Assert.AreEqual(expected8, actual8);
             Assert.AreEqual(expected9, actual9);
-
         }
+
         [TestMethod]
         public void TestBorder()
         {
             // arrange
-            var expected0 = "********************************************************************************";
-            var expected1 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-            var expected2 = "BBBBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+            Console.WindowWidth = 5;
+
+            var expected0 = "*****";
+            var expected1 = "AAAAA";
+            var expected2 = "AA";
+
             // act
             var actual0 = tableRenderer.Generate('*');
             var actual1 = tableRenderer.Generate('A');
+            
             // assert
             Assert.AreEqual(expected0, actual0);
             Assert.AreEqual(expected1, actual1);
