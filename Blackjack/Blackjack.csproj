@@ -48,6 +48,8 @@
     <Compile Include="ConsoleInputProvider.cs" />
     <Compile Include="ConsoleOutputProvider.cs" />
     <Compile Include="ConsoleTableRenderer.cs" />
+    <Compile Include="Dealer.cs" />
+    <Compile Include="Deck.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="Graphic.cs" />
     <Compile Include="Interfaces\ICard.cs" />
