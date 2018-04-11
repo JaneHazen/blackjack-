@@ -25,13 +25,14 @@ namespace Blackjack
 
       
         /// <summary>
-        /// Draw from the deck
+        /// Draw from the deck with specified amount 
         /// </summary>
         /// <param name="deck"></param>
         /// <param name="amt"></param>
         public void Draw(IDeck deck, int amt)
         {
-
+            var drawnCard = deck.Deal();
+           // Cards[amt].Add(drawnCard);
         }
 
         /// <summary>
@@ -55,6 +56,7 @@ namespace Blackjack
             }
             this.Name = name;
             this.Cards = new List<IHand>();
+            //will need to add cards from new instance of hand concrete class
         }
 
 
