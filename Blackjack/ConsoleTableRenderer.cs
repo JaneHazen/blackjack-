@@ -23,15 +23,20 @@ namespace Blackjack
         /// <param name="card">The card to be printed</param>
         /// <returns>The extended unicode representation of the card</returns>
         //public string ConvertToUnicode(ICard card)
-        //{
-        //    StringBuilder extendedUnicode = new StringBuilder("0001F0");
+        // {
+        //  StringBuilder extendedUnicode = new StringBuilder("0001F0");
 
-        //    return "\U0001F0A0";
+        //   return @"\U" + "0001F0" + card.Suit + "0";
         //}
 
+        /// <summary>
+        /// Generated ASCII border of 80 characters when given a char input 
+        /// </summary>
+        /// <param name="border"> The character to make the border</param>
+        /// <returns>The 80 character string</returns>
         public string Generate(char border)
         {
-            throw new NotImplementedException();
+        return String.Concat(Enumerable.Repeat(border, 80));
         }
 
         public string[,] Generate(int[][] graphic)

@@ -47,7 +47,7 @@ namespace Blackjack
         /// 
         /// Example 3:
         /// 
-        /// { (int)Color.Red, (int)Color.Green, (int)Color.Blue }
+        /// { (int)Color.Red, (int)Color.Green, (int)Color.Blue }t
         /// 
         /// An array containing Color enums, each of which is cast to an int.
         /// Because enums have a number value, after the cast, the array contains
