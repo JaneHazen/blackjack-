@@ -10,12 +10,13 @@ namespace Blackjack
     /// <summary>
     ///  The human player
     /// </summary>
-    public class Player : IPlayer
+    public class HumanPlayer : IPlayer
     {
         /// <summary>
         /// The player's name 
         /// </summary>
         public string Name { get; set; }
+      
 
         /// <summary>
         /// the hand interface, used to get the player's hand
@@ -25,20 +26,33 @@ namespace Blackjack
         /// <summary>
         /// The player's hand
         /// </summary>
-        //public IHand Cards()
-        //{
-        //    return this.hand.Cards();
-        //}
-      
+        public IHand Cards()
+        {
+            return this.hand;
+        }
 
-        public void Draw()
+        /// <summary>
+        /// Draw from the deck
+        /// </summary>
+        /// <param name="deck"></param>
+        /// <param name="amt"></param>
+        public void Draw(IDeck deck, int amt)
         {
 
         }
 
-        public Player()
+        /// <summary>
+        /// The human player's action
+        /// </summary>
+        public void GetAction()
         {
-            
+
+        }
+
+        public HumanPlayer(string name, IHand hand)
+        {
+            this.Name = name;
+            this.hand = hand;
         }
 
 
