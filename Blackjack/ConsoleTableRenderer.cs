@@ -65,9 +65,14 @@ namespace Blackjack
             return @"\U" + extendedUnicode.ToString();
         }
 
+        /// <summary>
+        /// Generated ASCII border of 80 characters when given a char input 
+        /// </summary>
+        /// <param name="border"> The character to make the border</param>
+        /// <returns>The 80 character string</returns>
         public string Generate(char border)
         {
-            throw new NotImplementedException();
+        return String.Concat(Enumerable.Repeat(border, 80));
         }
 
         public string[,] Generate(int[][] graphic)
