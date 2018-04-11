@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Blackjack.Interfaces
 {
-
+    /// <summary>
+    /// Suit Enum for card suits 
+    /// </summary>
     public enum CardSuit
     {
         Heart,
@@ -53,19 +55,12 @@ namespace Blackjack.Interfaces
         /// <summary>
         /// The Value of the card
         /// </summary>
-        int Value { get; set; }
+        int Value { get;}
 
         /// <summary>
         /// Reveals if the card is face Up or Down
         /// </summary>
         bool IsHidden { get; set; }
-
-        /// <summary>
-        /// It Override the ToSting() and returns the value and suit of each card
-        /// </summary>
-        /// <returns></returns>
-        string ToString();
-
 
     }
    

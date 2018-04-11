@@ -44,10 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Card.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="ConsoleInputProvider.cs" />
     <Compile Include="ConsoleOutputProvider.cs" />
     <Compile Include="ConsoleTableRenderer.cs" />
+    <Compile Include="Exceptions\InvalidInputException.cs" />
+    <Compile Include="Exceptions\InvalidMoveException.cs" />
     <Compile Include="BlackjackDealer.cs" />
     <Compile Include="BlackjackDeck.cs" />
     <Compile Include="GameManager.cs" />
@@ -62,6 +65,8 @@
     <Compile Include="Interfaces\ITableRenderer.cs" />
     <Compile Include="Interfaces\IMove.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="MoveProvider.cs" />
+    <Compile Include="PlayerAction.cs" />
     <Compile Include="HumanPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
