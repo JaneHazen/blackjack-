@@ -25,6 +25,14 @@ namespace Blackjack
 
         public string ConvertToUnicode(ICard card)
         {
+            if (card.IsHidden)
+            {
+                // This hardcoded value represents a card back: 🂠
+                // If the card is not visible, we don't care about the suit or name
+                // We just want to render the back of the card
+                return "\U1F0A0"; 
+            }
+
             StringBuilder extendedUnicode = new StringBuilder("0001F0");
             var nameMap = new Dictionary<String, String>();
 
