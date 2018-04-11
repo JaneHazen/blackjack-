@@ -66,7 +66,6 @@
     <Compile Include="ConsoleTableRendererTest.cs" />
     <Compile Include="GraphicTest.cs" />
     <Compile Include="CardTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MoveProviderTest.cs" />
   </ItemGroup>
   <ItemGroup>

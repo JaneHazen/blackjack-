@@ -10,7 +10,7 @@ namespace Blackjack.Interfaces
     public interface IHand
     {
         // initiates a list of cards (preferably two?) that will compromise the player's hand
-        List<ICard> FullHand { get; }
+        List<ICard> Cards { get; }
         // loops through the hand to return all cards in the hand
         int GetTotalValue();
         // adds a card to the hand

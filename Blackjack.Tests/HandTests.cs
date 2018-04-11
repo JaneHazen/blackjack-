@@ -9,19 +9,6 @@ namespace Blackjack.Tests
     [TestClass]
     public class HandTests
     {
-        IHand noAcesHand;
-        [TestInitialize]
-        public void Init()
-        {
-            var ace1 = new Mock<ICard>(MockBehavior.Strict);
-            var ace2 = new Mock<ICard>(MockBehavior.Strict);
-            var King = new Mock<ICard>(MockBehavior.Strict);
-            var Queen = new Mock<ICard>(MockBehavior.Strict);
-
-            var noAcesHand = new Mock<IHand>(MockBehavior.Strict);
-            noAcesHand.Object.AddCard(King.Object);
-            noAcesHand.Object.AddCard(Queen.Object);
-        }
 
 
         [TestMethod]
@@ -29,32 +16,47 @@ namespace Blackjack.Tests
         {
             //arrange
             var King = new Mock<ICard>(MockBehavior.Strict);
-            var Queen = new Mock<ICard>(MockBehavior.Strict);
-            var noAcesHand = new Mock<IHand>(MockBehavior.Strict);
-            var expected = new List<ICard>() { Queen.Object, King.Object};
+            var listOfCards = new List<ICard> { King.Object};
+            var actual = new Hand();
+            var expected = new Hand(listOfCards);
+
             //act
-            noAcesHand.Object.AddCard(King.Object);
-            noAcesHand.Object.AddCard(Queen.Object);
-
+            actual.AddCard(King.Object);
+            
             //assert
-            CollectionAssert.AreEqual(expected, noAcesHand.Object.FullHand);
+            CollectionAssert.AreEqual(expected.Cards, actual.Cards);
         }
-
+        
 
         [TestMethod]
         public void GetTotalValueTest()
         {
             //arrange
-
             var ace1 = new Mock<ICard>(MockBehavior.Strict);
-            var ace2 = new Mock<ICard>(MockBehavior.Strict);
-            var king = new Mock<ICard>(MockBehavior.Strict);
-            var queen = new Mock<ICard>(MockBehavior.Strict);
+            ace1.Setup(x => x.Name).Returns("Ace");
 
-            var noAcesHand = new Mock<IHand>()(MockBehavior.Strict);
+            var ace2 = new Mock<ICard>(MockBehavior.Strict);
+            ace2.Setup(x => x.Name).Returns("Ace");
+
+
+            var king = new Mock<ICard>(MockBehavior.Strict);
+            king.Setup(x => x.Value).Returns(10);
+            king.Setup(x => x.Name).Returns("King");
+
+            var queen = new Mock<ICard>(MockBehavior.Strict);
+            queen.Setup(x => x.Value).Returns(10);
+            queen.Setup(x => x.Name).Returns("Queen");
+
+            var listOfNoAces = new List<ICard> { king.Object, queen.Object };
+            var noAcesHand = new Hand(listOfNoAces);
+            var noAcesHandExpected = 20;
+
+
             //act
+            var noAcesHandExpected = noAcesHand.GetTotalValue();
 
             //assert
+            Assert.AreEqual();
         }
     }
 }

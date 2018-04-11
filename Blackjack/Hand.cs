@@ -7,12 +7,17 @@ using Blackjack.Interfaces;
 
 namespace Blackjack
 {
-    class Hand : IHand
+    public class Hand : IHand
     {
-        public List<ICard> FullHand { get; private set; }
-        Hand()
+        public List<ICard> Cards { get; private set; }
+        public Hand()
         {
-            
+            Cards = new List<ICard>();
+        }
+
+        public Hand(List<ICard> cards)
+        {
+            Cards = cards;
         }
 
         public int GetTotalValue()
@@ -21,10 +26,10 @@ namespace Blackjack
             int sum = 0;
             // make a list of integers representing the number of aces in the hand
             int Aces = 0;
-            foreach(ICard card in FullHand)
+            foreach(ICard card in Cards)
             {
                 // set the sum of the cards without the aces
-                if (card.Suit != <Enum> Ace)
+                if (card.Name != "Ace")
                     sum += card.Value;
                 // and remember the number of aces 
                 else
@@ -63,13 +68,14 @@ namespace Blackjack
 
             }
 
+            throw new ArgumentNullException();
         }
        
         // Add a card to the hand
        public void AddCard(ICard card)
         {
             //just shove it on the list and don't return anything
-            FullHand.Add(card);
+            Cards.Add(card);
         }
     }
 }
