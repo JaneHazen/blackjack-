@@ -1,4 +1,5 @@
 ﻿using System;
+using Blackjack.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Blackjack.Tests
@@ -10,7 +11,7 @@ namespace Blackjack.Tests
         public void TestCardConstructor()
         {
             //Arrange 
-            var expectedSuit = Interfaces.CardSuit.Club;
+            var expectedSuit = CardSuit.Club;
             var expectedName = "King";
             var expectedValue = 10;
             var expectedIsHidden = true;
@@ -19,7 +20,7 @@ namespace Blackjack.Tests
             var value = 10;
 
             //Act 
-            Card myCard = new Card(Interfaces.CardSuit.Club, name, value);
+            Card myCard = new Card(CardSuit.Club, name, value);
 
             //Arrange 
             Assert.AreEqual(expectedSuit, myCard.Suit);
