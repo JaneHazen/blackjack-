@@ -22,12 +22,48 @@ namespace Blackjack
         /// </summary>
         /// <param name="card">The card to be printed</param>
         /// <returns>The extended unicode representation of the card</returns>
-        //public string ConvertToUnicode(ICard card)
-        //{
-        //    StringBuilder extendedUnicode = new StringBuilder("0001F0");
+        public string ConvertToUnicode(ICard card)
+        {
+            StringBuilder extendedUnicode = new StringBuilder("0001F0");
+            var nameMap = new Dictionary<String, String>();
 
-        //    return "\U0001F0A0";
-        //}
+            nameMap.Add("J", "B");
+            nameMap.Add("Q", "D");
+            nameMap.Add("K", "E");
+            nameMap.Add("A", "1");
+            nameMap.Add("10", "A");
+
+            switch (card.Suit)
+            {
+                case CardSuit.Spade:
+                    extendedUnicode.Append("A");
+                    break;
+                case CardSuit.Heart:
+                    extendedUnicode.Append("B");
+                    break;
+                case CardSuit.Diamond:
+                    extendedUnicode.Append("C");
+                    break;
+                case CardSuit.Club:
+                    extendedUnicode.Append("D");
+                    break;
+                default:
+                    break;
+            }
+
+            int number;
+            bool result = int.TryParse(card.Name, out number);
+
+            if (result && number < 10)
+            {
+                extendedUnicode.Append(card.Name);
+            } else
+            {
+                extendedUnicode.Append(nameMap[card.Name.ToUpper()]);
+            }
+
+            return @"\U" + extendedUnicode.ToString();
+        }
 
         public string Generate(char border)
         {
