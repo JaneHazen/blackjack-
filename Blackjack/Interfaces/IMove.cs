@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Blackjack.Interfaces
 {
-    interface IMove
+    public interface IMove
     {
+       //player can ask for another card
+       void  Hit();
+       //player can keep their current cards
+       void Stand();
     }
 }

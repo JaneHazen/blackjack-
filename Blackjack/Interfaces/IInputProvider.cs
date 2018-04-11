@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Blackjack.Interfaces
 {
-    interface IInputProvider
+    public interface IInputProvider
     {
-        void Write(String text);
+        /// <summary>
+        /// Reads string input from the user
+        /// </summary>
+        /// <returns>Returns the input</returns>
+        String Read();
     }
 }
