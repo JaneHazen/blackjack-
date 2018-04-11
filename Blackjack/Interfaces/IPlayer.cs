@@ -19,7 +19,7 @@ namespace Blackjack.Interfaces
        /// <summary>
        ///  The player's hand
        /// </summary>
-       // List<IHand> Cards { get; set; }
+        List<IHand> Cards { get; set; }
 
          /// <summary>
        ///  The player's draw method to take cards from deck
