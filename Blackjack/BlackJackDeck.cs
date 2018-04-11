@@ -7,28 +7,67 @@ using System.Threading.Tasks;
 
 namespace Blackjack
 {
-    class BlackJackDeck : IDeck
+    /// <summary>
+    /// The deck of cards
+    /// </summary>
+    public class BlackjackDeck : IDeck
     {
-        public List<ICard> Cards => throw new NotImplementedException();
+        /// <summary>
+        /// The available cards 
+        /// </summary>
+        public List<ICard> Cards { get; private set; }
 
-        public void Add(ICard card)
+        /// <summary>
+        /// Constructor which adds cards to deck
+        /// </summary>
+        /// <param name="cards"></param>
+        public BlackjackDeck(List<ICard> cards)
         {
-            throw new NotImplementedException();
+            this.Cards = cards;
         }
 
+        /// <summary>
+        /// Adding cards to the deck
+        /// </summary>
+        /// <param name="card"></param>
+        public void Add( ICard card )
+        {
+            Cards.Add(card);
+        }
+
+        /// <summary>
+        /// Action to get the last card from the deck
+        /// </summary>
+        /// <returns></returns>
         public ICard Deal()
         {
-            throw new NotImplementedException();
+            ICard dealtCard = Cards.Last();
+            Cards.Remove(dealtCard);
+            return dealtCard;
         }
 
-        public void Empty()
+        /// <summary>
+        /// Check that deck is empty of cards 
+        /// </summary>
+        /// <returns></returns>
+        public bool isEmpty()
         {
-            throw new NotImplementedException();
+            return Cards.Count == 0;
         }
 
-        public void Shuffle()
+        private void AddAllCardsToDeck()
         {
-            throw new NotImplementedException();
+            foreach(CardSuit suit in Enum.GetValues(typeof(CardSuit)))
+            {
+                //foreach()
+            
+            }
         }
+            
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Shuffle() => throw new NotImplementedException();
     }
 }

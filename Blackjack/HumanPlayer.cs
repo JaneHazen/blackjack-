@@ -21,7 +21,7 @@ namespace Blackjack
         /// <summary>
         /// The player's current set of cards
         /// </summary>
-        public List<IHand> Cards { get; set; }
+        public List<IHand> PlayerHands { get; set; }
 
       
         /// <summary>
@@ -31,7 +31,17 @@ namespace Blackjack
         /// <param name="amt"></param>
         public void Draw(IDeck deck, int amt)
         {
-            var drawnCard = deck.Deal();
+
+            
+            for(var i = 0; i < amt; i++)
+            {
+                var drawnCard = deck.Deal();
+                var hand;
+                if(PlayerHands.Count == 0)
+                {
+                   
+                }
+            }
            // Cards[amt].Add(drawnCard);
         }
 
@@ -55,7 +65,7 @@ namespace Blackjack
                 throw new ArgumentNullException("player name");
             }
             this.Name = name;
-            this.Cards = new List<IHand>();
+            this.PlayerHands = new List<IHand>();
             //will need to add cards from new instance of hand concrete class
         }
 
