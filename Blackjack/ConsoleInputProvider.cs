@@ -7,7 +7,7 @@ using Blackjack.Interfaces;
 
 namespace Blackjack
 {
-    class ConsoleInputProvider : IInputProvider
+    public class ConsoleInputProvider : IInputProvider
     {
 
         public String Read()
