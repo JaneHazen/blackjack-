@@ -57,7 +57,11 @@ namespace Blackjack
 
         private void AddAllCardsToDeck()
         {
-
+            foreach(CardSuit suit in Enum.GetValues(typeof(CardSuit)))
+            {
+                //foreach()
+            
+            }
         }
             
 
