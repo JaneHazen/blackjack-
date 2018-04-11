@@ -11,22 +11,48 @@ namespace Blackjack.Interfaces
     class GameManager
     {
         /// <summary>
-        /// This will hold the list of players including dealer as player
+        /// This will hold the list of player
         /// </summary>
-        private List<IPlayer> player;
+        private List<IPlayer> players;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private IPlayer dealer;
 
         /// <summary>
         /// This is the deck the will hold the cards for the game
-        /// </summary>
+        /// </summary> 
         private IDeck deck;
 
+        /// <summary>
+        ///
+        /// </summary>
+        private ITable table;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private ITableRenderer tableRenderer;
 
         /// <summary>
         /// Defualt constructor
         /// </summary>
         public GameManager()
         {
-            
+          
+
+        }
+
+        public GameManager(
+                            IDeck deckOfCards,
+                            ITable table,
+                            ITableRenderer tableRenderer,
+                            IPlayer Dealer = null,
+                            List<IPlayer> players = null)
+        {
+            //Create Dealer if not supplied
+            //Create Player if not supplied 
         }
 
         /// <summary>
@@ -34,6 +60,7 @@ namespace Blackjack.Interfaces
         /// </summary>
         public void StartGame()
         {
+            //
             throw new NotImplementedException();
         }
     }
