@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blackjack.Interfaces
+namespace Blackjack
 {
-    public interface IMove
+    public enum PlayerAction
     {
-      //will return player's move
-      PlayerAction  GetMove();
+        hit,
+        stand
     }
 }
