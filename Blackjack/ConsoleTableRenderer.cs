@@ -22,6 +22,7 @@ namespace Blackjack
         /// </summary>
         /// <param name="card">The card to be printed</param>
         /// <returns>The extended unicode representation of the card</returns>
+
         public string ConvertToUnicode(ICard card)
         {
             StringBuilder extendedUnicode = new StringBuilder("0001F0");
