@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Blackjack
 {
-    public class Dealer : IPlayer
+    public class BlackjackDealer : IPlayer
     {
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public List<IHand> Cards { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
