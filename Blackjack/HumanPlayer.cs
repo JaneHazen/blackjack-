@@ -21,26 +21,46 @@ namespace Blackjack
         /// <summary>
         /// The player's current set of cards
         /// </summary>
-        public List<IHand> Cards { get; set; }
+        public List<IHand> PlayerHands { get;}
+        public GameState gameState { get; set; }
+    
 
-      
+
+        public HumanPlayer()
+        {
+            PlayerHands = new List<IHand>();
+        }
+
         /// <summary>
-        /// Draw from the deck with specified amount 
+        /// Draw from the deck with specified amount . Added only to the first hand
         /// </summary>
         /// <param name="deck"></param>
         /// <param name="amt"></param>
         public void Draw(IDeck deck, int amt)
         {
-            var drawnCard = deck.Deal();
-           // Cards[amt].Add(drawnCard);
+         
+            for(var i = 0; i < amt; i++)
+            {
+                var drawnCard = deck.Deal();
+                
+                if(PlayerHands.Count == 0)
+                {
+                   
+                    var hand = new Hand();
+                    PlayerHands.Add(hand);
+                }
+
+                PlayerHands[0].AddCard(deck.Deal());
+            }
+         
         }
 
         /// <summary>
         /// The human player's action
         /// </summary>
-        public void GetAction()
+        public PlayerAction GetAction(IMove moveProvider)
         {
-
+            return moveProvider.GetMove();
         }
 
         /// <summary>
@@ -55,8 +75,7 @@ namespace Blackjack
                 throw new ArgumentNullException("player name");
             }
             this.Name = name;
-            this.Cards = new List<IHand>();
-            //Cards.Add(new Hand());
+            this.PlayerHands = new List<IHand>();
             //will need to add cards from new instance of hand concrete class
         }
 

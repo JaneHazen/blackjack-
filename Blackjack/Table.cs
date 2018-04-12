@@ -19,10 +19,22 @@ namespace Blackjack
         /// </summary>
         public IPlayer Dealer { get; set; }
 
+        // methods for getting the hand
+
+        // methods for getting the points
+
+        // methods for other info
+
+        public Table() :this(null, null)
+        {
+
+        }
+
         public Table(IEnumerable<IPlayer> players, IPlayer dealer)
         {
             Players = players;
             Dealer = dealer;
         }
+
     }
 }

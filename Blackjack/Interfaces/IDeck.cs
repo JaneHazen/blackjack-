@@ -15,9 +15,8 @@ namespace Blackjack.Interfaces
        ///  All the cards in the deck
        /// </summary>
        List<ICard> Cards { get; }
-       
 
-        /// <summary>
+       /// <summary>
        ///  Deal out the cards
        /// </summary>
        ICard Deal();
@@ -40,6 +39,6 @@ namespace Blackjack.Interfaces
        /// <summary>
        ///  Add a card to the deck
        /// </summary>
-       void Add(ICard card);
+      void Add(ICard card);
     }
 }
