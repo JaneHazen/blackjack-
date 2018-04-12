@@ -60,5 +60,35 @@ namespace Blackjack.Tests
             Assert.AreEqual(expectedCard , actualCard);
             Assert.AreEqual(expectedNumberOfCards, actualNumberOfCards);
         }
+
+        [TestMethod]
+        public void TestBlackjackDeckEmpty()
+        {
+            //arrange
+            var deck = new BlackjackDeck();
+            var expectedCount = 0;
+
+            //act
+            deck.Empty();
+            var actualCount = deck.Cards.Count();
+
+            //assert
+            Assert.AreEqual(expectedCount , actualCount);            
+        }
+
+        [TestMethod]
+        public void TestBlackjackDeckShuffle()
+        {
+            //arrange
+            var deck = new BlackjackDeck();
+            var pickedCardFromDeck = deck.Cards[6];
+
+            //act
+            deck.Shuffle();
+            var pickedCardFromShuffledDeck = deck.Cards[6];
+
+            //assert
+            Assert.AreNotSame(pickedCardFromDeck , pickedCardFromShuffledDeck);
+        }
     }
 }

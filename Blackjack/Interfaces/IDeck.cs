@@ -35,7 +35,7 @@ namespace Blackjack.Interfaces
         /// <summary>
        /// Shuffle the deck
        /// </summary>
-       void Shuffle();
+       IDeck Shuffle();
 
        /// <summary>
        ///  Add a card to the deck

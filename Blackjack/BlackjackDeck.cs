@@ -18,6 +18,11 @@ namespace Blackjack
         public List<ICard> Cards { get; private set; }
 
         /// <summary>
+        /// Random instantiated for shuffle method
+        /// </summary>
+        Random random = new Random();
+
+        /// <summary>
         /// Adding 52 cards to the deck
         /// </summary>
         public BlackjackDeck()
@@ -99,18 +104,24 @@ namespace Blackjack
                     Card card = new Card(suit , rank , dict[rank]);
                     Cards.Add(card);
                 }
-            
             }   
         }
 
-            
-
         /// <summary>
-        /// 
+        /// Shuffles the deck
         /// </summary>
-        public void Shuffle()
+        public IDeck Shuffle()
         {
+            for(var i = 0; i < Cards.Count; i++)
+            {
+                //random.Next returns a non negative integer, with min and max inputs 
+                var val = random.Next(i , Cards.Count);
 
+                ICard temp = Cards[i];
+                Cards[i] = Cards[val];
+                Cards[val] = temp;
+            }
+            return this;
         }
     }
 }
