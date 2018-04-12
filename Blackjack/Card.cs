@@ -47,6 +47,17 @@ namespace Blackjack
             Value = value;
             IsHidden = true;
         }
+        /// <summary>
+        /// Just for testing purpose
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            var stringCard = new StringBuilder();
+            stringCard.Append(this.Suit + "|" + this.Rank + " " + this.Value);
+            return stringCard.ToString();
+        }
+
 
     }
 }
