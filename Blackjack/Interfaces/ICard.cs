@@ -19,7 +19,7 @@ namespace Blackjack.Interfaces
 
     public enum CardRank
     {
-        AceLow = 1,
+        Ace,
         Two,
         Three,
         Four,
@@ -31,8 +31,7 @@ namespace Blackjack.Interfaces
         Ten,
         Jack,
         Queen,
-        King,
-        AceHigh
+        King
     }
 
     public interface ICard

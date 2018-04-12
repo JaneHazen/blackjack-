@@ -65,10 +65,10 @@ namespace Blackjack
                 foreach(CardRank rank in Enum.GetValues(typeof(CardRank)))
                 {
                     //I should skip acelow
-                    if (rank == CardRank.AceLow)
-                    {
-                        continue;
-                    }
+                    //if (rank == CardRank.AceLow)
+                    //{
+                    //    continue;
+                    //}
                     //Add(new Card(suit , rank, ));
                 }
             
