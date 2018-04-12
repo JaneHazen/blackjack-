@@ -28,17 +28,9 @@ namespace Blackjack
             Graphic cardGraphic;
 
             var bitmap = Graphic.CardTemplate;
-            int c; // c is for color
 
-            if (card.Suit == CardSuit.Club || card.Suit == CardSuit.Spade)
-            {
-                c = 0; // 0 is black
-            }
-            else
-            {
-                c = 7; // 7 is red
-            }
-
+            // If the card is hidden/flipped over, just make a big red rectangle
+            // and return it immediately
 
             if (card.IsHidden)
             {
@@ -52,8 +44,27 @@ namespace Blackjack
                 return cardGraphic;
             }
 
+            // If the card is face up, find out its color...
+
+            int c; // c is for color
+
+            if (card.Suit == CardSuit.Club || card.Suit == CardSuit.Spade)
+            {
+                c = 0; // 0 is black
+            }
+            else
+            {
+                c = 7; // 7 is red
+            }
+
+            // ...create the top and bottom row of spots, displaying the suit and number...
+            // (1's represent white, c's represent the color -- black or red -- of the
+            // card)
+
             bitmap[0] = new int[] { c,c,1,1,1,1,1,1,1 };
             bitmap[9] = new int[] { 1,1,1,1,1,1,1,c,c };
+
+            // ...and figure out where the rest of the spots go...
 
             var array1 = new int[] { 1,1,1,1,c,1,1,1,1 };
             var array2 = new int[] { 1,1,c,1,1,1,c,1,1 };
@@ -106,9 +117,19 @@ namespace Blackjack
                     bitmap[3] = array1;
                     bitmap[5] = array1;
                     break;
+                // if we have an ace or a face card, put only one spot in the center
                 default:
                     bitmap[4] = array1;
                     break;
+            }
+
+            // Now we fill out the white rows on the card
+
+            for (int i = 0; i < bitmap.Length; i++)
+            {
+                if (bitmap[i].Length == 0) {
+                    bitmap[i] = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, };
+                }
             }
 
             cardGraphic = new Graphic(bitmap);
