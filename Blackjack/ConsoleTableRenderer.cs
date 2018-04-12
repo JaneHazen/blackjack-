@@ -98,7 +98,7 @@ namespace Blackjack
             }
 
             outputProvider.WriteLine();
-            outputProvider.Write($"{name} Points: {points}");
+            outputProvider.Write($"{name}'s Points: {points}");
             outputProvider.WriteLine();
             outputProvider.WriteLine(border);
         }
