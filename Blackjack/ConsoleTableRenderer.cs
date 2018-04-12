@@ -22,44 +22,85 @@ namespace Blackjack
         /// on it is the actual jagged array int[][]).
         /// </summary>
         /// <param name="card"></param>
-        /// <returns></returns>
+        /// <returns>A graphic of the card represented in code</returns>
         public Graphic Generate(ICard card)
         {
-            // we're making an empty graphic just to shut up the compiler. 
-            // please remove 
-            Graphic cardGraphic = new Graphic(new int[0][]);
+            Graphic cardGraphic;
+
+            var bitmap = Graphic.CardTemplate;
 
             if (card.IsHidden)
             {
-                var bitmap = Graphic.CardTemplate;
-                bitmap[0] = [001111111];
-                bitmap[9] = [111111100];
-                
-                for (int i = 2; i <= 10; i++)
+                for (int i = 0; i <= 9; i++)
                 {
-                    bitmap[i] = 1;
+                    bitmap[i] = new int[] { 777777777 };
                 }
 
-                switch (card.Rank)
-                {
-                    case 
-                }
+                cardGraphic = new Graphic(bitmap);
 
-                //  cardGraphic = new Graphic();
+                return cardGraphic;
             }
 
-            int number;
+            bitmap[0] = new int[] { 001111111 };
+            bitmap[9] = new int[] { 111111100 };
 
-            var results = int.TryParse(card.Name, out number);
+            var array1 = new int[] { 111101111 };
+            var array2 = new int[] { 110111011 };
+            var array3 = new int[] { 111100111 };
+            var array4 = new int[] { 110101011 };
 
-            if (results)
+            switch (card.Rank)
             {
-                //  cardGraphic = new Graphic();
+                case CardRank.Ten:
+                    bitmap[3] = array4;
+                    bitmap[4] = array2;
+                    bitmap[5] = array4;
+                    bitmap[6] = array1;
+                    break;
+                case CardRank.Nine:
+                    bitmap[3] = array4;
+                    bitmap[4] = array4;
+                    bitmap[5] = array4;
+                    break;
+                case CardRank.Eight:
+                    bitmap[3] = array4;
+                    bitmap[4] = array2;
+                    bitmap[5] = array4;
+                    break;
+                case CardRank.Seven:
+                    bitmap[3] = array2;
+                    bitmap[4] = array4;
+                    bitmap[5] = array2;
+                    break;
+                case CardRank.Six:
+                    bitmap[3] = array2;
+                    bitmap[4] = array3;
+                    bitmap[5] = array2;
+                    break;
+                case CardRank.Five:
+                    bitmap[3] = array2;
+                    bitmap[4] = array1;
+                    bitmap[5] = array2;
+                    break;
+                case CardRank.Four:
+                    bitmap[3] = array2;
+                    bitmap[5] = array2;
+                    break;
+                case CardRank.Three:
+                    bitmap[3] = array1;
+                    bitmap[4] = array1;
+                    bitmap[5] = array1;
+                    break;
+                case CardRank.Two:
+                    bitmap[3] = array2;
+                    bitmap[5] = array2;
+                    break;
+                default:
+                    bitmap[4] = array1;
+                    break;
             }
-            else
-            {
-                //  cardGraphic = new Graphic();
-            }
+
+            cardGraphic = new Graphic(bitmap);
 
             return cardGraphic;
         }
