@@ -31,10 +31,12 @@ namespace Blackjack.Interfaces
         /// Our main rendering method, for drawing the player's cards and points
         /// </summary>
         /// <param name="player"></param>
+        /// <param points>Only exists bc waiting to get IHand code with a points
+        /// member...</param>
         void RenderHandAndPoints(IPlayer player, int points);
 
         /// <summary>
-        /// Renders a 2-D string array -- "rendering" strings or 1-D arrays is for
+        /// Renders a 2-D array -- "rendering" strings or 1-D arrays is for
         /// The output provider
         /// </summary>
         /// <param name="graphic"></param>

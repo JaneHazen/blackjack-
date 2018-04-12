@@ -51,7 +51,7 @@ namespace Blackjack
         }
 
         /// <summary>
-        /// Generated ASCII border of 80 characters when given a char input 
+        /// Generated ASCII border of characters when given a char input 
         /// </summary>
         /// <param name="border"> The character to make the border</param>
         /// <returns>The 80 character string</returns>
