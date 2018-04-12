@@ -38,7 +38,7 @@ namespace Blackjack.Interfaces
         /// The output provider
         /// </summary>
         /// <param name="graphic"></param>
-        void Render(string[,] graphic);
+        void Render(Graphic graphic);
 
         // Renderer helpers -- testable!
 
@@ -49,7 +49,7 @@ namespace Blackjack.Interfaces
         /// <param name="card">The card that will generate a graphical 
         /// representation</param>
         /// <returns>A 2-D string array representing the card</returns>
-        String[,] Generate(ICard card);
+        Graphic Generate(ICard card);
 
         /// <summary>
         /// A method that generates a series of chars to fill a single line.
@@ -68,7 +68,7 @@ namespace Blackjack.Interfaces
         /// </summary>
         /// <param name="graphic">A 2-D array representing the graphic</param>
         /// <returns>A colored 2-D string array representing the graphic</returns>
-        String[,] Generate(int[][] graphic);
+        Graphic Generate(int[][] graphic);
 
     }
 }
