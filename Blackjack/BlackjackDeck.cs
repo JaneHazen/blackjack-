@@ -25,7 +25,7 @@ namespace Blackjack
         /// <summary>
         /// Adding 52 cards to the deck
         /// </summary>
-        public BlackjackDeck()
+        public BlackJackDeck()
         {
             Cards = new List<ICard>();
             AddAllCardsToDeck();
