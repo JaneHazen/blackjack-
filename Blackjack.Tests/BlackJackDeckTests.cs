@@ -81,14 +81,14 @@ namespace Blackjack.Tests
         {
             //arrange
             var deck = new BlackjackDeck();
-            var pickedCardFromDeck = deck.Cards[6];
-
+            var deck2 = new BlackjackDeck();
+            
             //act
+            
             deck.Shuffle();
-            var pickedCardFromShuffledDeck = deck.Cards[6];
-
+         
             //assert
-            Assert.AreNotSame(pickedCardFromDeck , pickedCardFromShuffledDeck);
+            Assert.AreNotEqual(deck , deck2);
         }
     }
 }
