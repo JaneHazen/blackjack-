@@ -28,6 +28,19 @@ namespace Blackjack
             Graphic cardGraphic;
 
             var bitmap = Graphic.CardTemplate;
+            int c; // c is for color
+
+            if (card.Suit == CardSuit.Club || card.Suit == CardSuit.Spade)
+            {
+                c = 0; // 0 is black
+            }
+            else
+            {
+                c = 7; // 7 is red
+            }
+
+            // all those 0's should be replaced by c's so we can have red hearts
+            // and black clubs
 
             if (card.IsHidden)
             {
