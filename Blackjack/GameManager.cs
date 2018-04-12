@@ -152,6 +152,12 @@ namespace Blackjack.Interfaces
             throw new NotImplementedException();
         }
 
+        public void CheckIfWin(IHand dealerHand, IHand playerHand )
+        {
+            
+        }
+    }
+}
         /// <summary>
         /// This function deals out the first two card playes and dealer
         /// </summary>
