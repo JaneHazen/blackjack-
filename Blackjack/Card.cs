@@ -40,11 +40,10 @@ namespace Blackjack
         /// <param name="suit"></param>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public Card(CardSuit suit, CardRank rank, string name, int value)
+        public Card(CardSuit suit, CardRank rank, int value)
         {
             Suit = suit;
             Rank = rank;
-            Name = name;
             Value = value;
             IsHidden = true;
         }

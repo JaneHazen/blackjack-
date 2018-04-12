@@ -69,11 +69,12 @@ namespace Blackjack
                     {
                         continue;
                     }
-                    //Add(new Card(suit , rank));
+                    //Add(new Card(suit , rank, ));
                 }
             
-            }
+            }   
         }
+
             
 
         /// <summary>
