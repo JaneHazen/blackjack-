@@ -69,9 +69,29 @@ namespace Blackjack
             throw new NotImplementedException();
         }
 
-        public void RenderHandAndPoints(IPlayer player)
+        public void RenderHandAndPoints(IPlayer player, int points)
         {
-            throw new NotImplementedException();
+            var hand = player.Cards;
+            var name = player.Name;
+
+            IOutputProvider outputProvider = new ConsoleOutputProvider();
+
+            var border = Generate('*');
+
+            outputProvider.WriteLine(border);
+            outputProvider.WriteLine();
+
+            foreach (ICard card in hand)
+            {
+                var cardGraphic = Generate(card);
+                Render(cardGraphic);
+                outputProvider.Write("  ");
+            }
+
+            outputProvider.WriteLine();
+            outputProvider.Write($"{name.ToUpper()} Points: {points}");
+            outputProvider.WriteLine();
+            outputProvider.WriteLine(border);
         }
     }
 }
