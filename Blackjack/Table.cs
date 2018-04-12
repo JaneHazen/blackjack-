@@ -12,18 +12,12 @@ namespace Blackjack
         /// <summary>
         /// A list (or array (or listarray)) of the players
         /// </summary>
-        public IEnumerable<IPlayer> Players { get; }
+        public IEnumerable<IPlayer> Players { get; set; }
 
         /// <summary>
         /// The dealer. The one to beat.
         /// </summary>
-        public IPlayer Dealer { get; }
-
-        // methods for getting the hand
-
-        // methods for getting the points
-
-        // methods for other info
+        public IPlayer Dealer { get; set; }
 
         public Table(IEnumerable<IPlayer> players, IPlayer dealer)
         {

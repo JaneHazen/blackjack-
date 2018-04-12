@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 namespace Blackjack
 {
     /// <summary>
-    /// A way of representing colors in our graphics, using ints 0 to 9
+    /// A way of representing colors in our graphics, using ints 0 to 9.
+    /// 
+    /// We cannot use ConsoleColor directly, even though it is also an enum,
+    /// because some of the console colors we want to use are represented by
+    /// multiple digits (ConsoleColor.Yellow = 14), or have names that differ
+    /// from common English usage (ConsoleColor.DarkMagenta is purple; 
+    /// ConsoleColor.DarkYellow is orange).
     /// </summary>
     public enum Color
     {

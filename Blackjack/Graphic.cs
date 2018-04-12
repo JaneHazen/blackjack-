@@ -47,7 +47,7 @@ namespace Blackjack
         /// 
         /// Example 3:
         /// 
-        /// { (int)Color.Red, (int)Color.Green, (int)Color.Blue }t
+        /// { (int)Color.Red, (int)Color.Green, (int)Color.Blue }
         /// 
         /// An array containing Color enums, each of which is cast to an int.
         /// Because enums have a number value, after the cast, the array contains
@@ -77,6 +77,11 @@ namespace Blackjack
                 return coloredMap;
             }
         }
+
+        /// <summary>
+        /// Speeds up generating cards a little by providing a template of the proper size
+        /// </summary>
+        public static int[][] CardTemplate = new int[10][];
 
         public Graphic(int[][] bitmap)
         {
