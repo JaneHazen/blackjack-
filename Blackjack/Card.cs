@@ -27,6 +27,7 @@ namespace Blackjack
         /// Reveals if the card is face Up or Down
         /// </summary>
         public bool IsHidden { get; set; }
+        public CardRank Rank { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         /// <summary>
         /// Card Cosntructor sets suit, name, value and isHidden
