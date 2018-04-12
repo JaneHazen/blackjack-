@@ -79,6 +79,13 @@ namespace Blackjack
 
         }
 
+        public override string ToString()
+        {
+            string status = this.gameState.ToString();
+            string playerStatus = "You Game status is: " + status;
+            return status;
+
+        }
 
     }
 }
