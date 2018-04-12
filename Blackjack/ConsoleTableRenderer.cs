@@ -283,5 +283,7 @@ namespace Blackjack
                 RenderHandAndPoints(player, points);
             }
         }
+
+
     }
 }
