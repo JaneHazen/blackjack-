@@ -108,6 +108,9 @@ namespace Blackjack
         /// <summary>
         /// 
         /// </summary>
-        public void Shuffle() => throw new NotImplementedException();
+        public void Shuffle()
+        {
+
+        }
     }
 }
