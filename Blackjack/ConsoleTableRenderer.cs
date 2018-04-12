@@ -31,6 +31,20 @@ namespace Blackjack
 
             if (card.IsHidden)
             {
+                var bitmap = Graphic.CardTemplate;
+                bitmap[0] = [001111111];
+                bitmap[9] = [111111100];
+                
+                for (int i = 2; i <= 10; i++)
+                {
+                    bitmap[i] = 1;
+                }
+
+                switch (card.Rank)
+                {
+                    case 
+                }
+
                 //  cardGraphic = new Graphic();
             }
 
