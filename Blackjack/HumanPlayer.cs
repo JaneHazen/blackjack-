@@ -79,6 +79,13 @@ namespace Blackjack
             //will need to add cards from new instance of hand concrete class
         }
 
+        public override string ToString()
+        {
+            string status = this.gameState.ToString();
+            string playerStatus = "You Game status is: " + status;
+            return status;
+
+        }
 
     }
 }
