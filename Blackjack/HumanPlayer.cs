@@ -32,7 +32,7 @@ namespace Blackjack
         public void Draw(IDeck deck, int amt)
         {
             var drawnCard = deck.Deal();
-           // Cards[amt].Add(drawnCard);
+            Cards[amt].AddCard(drawnCard);
         }
 
         /// <summary>
