@@ -25,7 +25,9 @@ namespace Blackjack
         /// <returns></returns>
         public Graphic Generate(ICard card)
         {
-            Graphic cardGraphic;
+            // we're making an empty graphic just to shut up the compiler. 
+            // please remove 
+            Graphic cardGraphic = new Graphic(new int[0][]);
 
             if (card.IsHidden)
             {
