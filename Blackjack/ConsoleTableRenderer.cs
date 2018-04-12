@@ -210,7 +210,43 @@ namespace Blackjack
         {
             var dealer = this.Table.Dealer;
             var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
-            RenderHandAndPoints(this.Table.Dealer, dealerPoint);
+            var dealerCards = dealer.PlayerHands[0].Cards;
+
+
+
+
+            Console.WriteLine($"Dealer Name: {dealer.Name}" );
+            Console.WriteLine($"Dealer Points: {dealerPoint}");
+            Console.WriteLine("----- Dealer Hand -------");
+            foreach(ICard card in dealerCards)
+            {
+                Console.WriteLine(card); 
+            }
+
+            Console.WriteLine("--------------------------------Player Details-------------------------------------------");
+
+            var players = this.Table.Players;
+
+            foreach (var player in players)
+            {
+                var playerePoint = player.PlayerHands[0].GetTotalValue();
+                var playerCards = player.PlayerHands[0].Cards;
+              
+                Console.WriteLine($"Player Name: {player.Name}");
+                Console.WriteLine($"Player Points: {playerePoint}");
+                Console.WriteLine("----- Player Hand -------");
+                foreach (ICard card in playerCards)
+                {
+                    Console.WriteLine(card);
+                }
+
+                Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            }
+
+
+            //TODO replace later with graphic version
+
+            //RenderHandAndPoints(this.Table.Dealer, dealerPoint);
         }
 
         /// <summary>
