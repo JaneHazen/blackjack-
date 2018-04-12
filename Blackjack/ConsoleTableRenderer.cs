@@ -9,8 +9,20 @@ namespace Blackjack
 {
     public class ConsoleTableRenderer: ITableRenderer
     {
+        /// <summary>
+        /// A bag containing a collection of players and a dealer.
+        /// That's all it does.
+        /// No game functionality in there.
+        /// </summary>
         public ITable Table { get; }
 
+        /// <summary>
+        /// A method for generating graphic objects from cards.
+        /// A graphic is, basically, a jagged int array (the property Bitmap
+        /// on it is the actual jagged array int[][]).
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
         public Graphic Generate(ICard card)
         {
             Graphic cardGraphic;
@@ -22,7 +34,7 @@ namespace Blackjack
 
             int number;
 
-            var results = int.TryParse(card.Name, number);
+            var results = int.TryParse(card.Name, out number);
 
             if (results)
             {
@@ -121,6 +133,37 @@ namespace Blackjack
             outputProvider.Write($"{name}'s Points: {points}");
             outputProvider.WriteLine();
             outputProvider.WriteLine(border);
+        }
+
+        /// <summary>
+        /// A method for rendering the whole table, with all players and the dealer
+        /// </summary>
+        /// <param name="players">A collection of *active* players to render</param>
+        /// <param name="playerPoints">A collection listing all the player's points.
+        /// *** --->>> Once hands have a points member REMOVE</param>
+        /// <param name="dealer">The dealer</param>
+        /// <param name="dealerPoints"> The dealer's points       
+        /// *** --->>> Once hands have a points member REMOVE</param>
+
+        public void RenderWholeTable(IEnumerable<IPlayer> players, IEnumerable<int> playerPoints, IPlayer dealer, int dealerPoints)
+        {
+            List<IPlayer> allTogetherNow = new List<IPlayer>();
+
+            allTogetherNow = players.Select(x => x).ToList();
+            allTogetherNow.Add(dealer);
+
+            List<int> allThePoints = new List<int>();
+
+            allThePoints = playerPoints.Select(x => x).ToList();
+            allThePoints.Add(dealerPoints);
+
+            for (int i = 0; i < allTogetherNow.Count; i++)
+            {
+                var player = allTogetherNow[i];
+                var points = allThePoints[i];
+
+                RenderHandAndPoints(player, points);
+            }
         }
     }
 }

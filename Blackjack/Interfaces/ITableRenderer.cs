@@ -70,5 +70,17 @@ namespace Blackjack.Interfaces
         /// <returns>A colored 2-D string array representing the graphic</returns>
         Graphic Generate(int[][] graphic);
 
+        /// <summary>
+        /// A method for rendering the whole table, with all players and the dealer
+        /// </summary>
+        /// <param name="players">A collection of *active* players to render</param>
+        /// <param name="playerPoints">A collection listing all the player's points.
+        /// *** --->>> Once hands have a points member REMOVE</param>
+        /// <param name="dealer">The dealer</param>
+        /// <param name="dealerPoints"> The dealer's points       
+        /// *** --->>> Once hands have a points member REMOVE</param>
+
+        void RenderWholeTable(IEnumerable<IPlayer> players, IEnumerable<int> playerPoints, IPlayer dealer, int dealerPoints);
     }
+
 }
