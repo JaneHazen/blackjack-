@@ -14,7 +14,7 @@ namespace Blackjack
         /// That's all it does.
         /// No game functionality in there.
         /// </summary>
-        public ITable Table { get; }
+        public ITable Table { get; set; }
 
         /// <summary>
         /// A method for generating graphic objects from cards.
