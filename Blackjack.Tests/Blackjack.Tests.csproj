@@ -69,6 +69,7 @@
     <Compile Include="GraphicTest.cs" />
     <Compile Include="CardTests.cs" />
     <Compile Include="MoveProviderTest.cs" />
+    <Compile Include="HumanPlayerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blackjack\Blackjack.csproj">

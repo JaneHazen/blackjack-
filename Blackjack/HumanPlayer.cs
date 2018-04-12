@@ -76,7 +76,7 @@ namespace Blackjack
             }
             this.Name = name;
             this.PlayerHands = new List<IHand>();
-            //will need to add cards from new instance of hand concrete class
+
         }
 
         public override string ToString()
