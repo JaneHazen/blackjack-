@@ -70,5 +70,6 @@ namespace Blackjack.Tests
             Assert.AreEqual(expected1, actual1);
             Assert.AreNotEqual(expected2, actual1);
         }
+
     }
 }
