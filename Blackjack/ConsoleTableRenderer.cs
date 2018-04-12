@@ -39,14 +39,12 @@ namespace Blackjack
                 c = 7; // 7 is red
             }
 
-            // all those 0's should be replaced by c's so we can have red hearts
-            // and black clubs
 
             if (card.IsHidden)
             {
                 for (int i = 0; i <= 9; i++)
                 {
-                    bitmap[i] = new int[] { 777777777 };
+                    bitmap[i] = new int[] { 7,7,7,7,7,7,7,7,7 };
                 }
 
                 cardGraphic = new Graphic(bitmap);
@@ -54,19 +52,19 @@ namespace Blackjack
                 return cardGraphic;
             }
 
-            bitmap[0] = new int[] { 001111111 };
-            bitmap[9] = new int[] { 111111100 };
+            bitmap[0] = new int[] { c,c,1,1,1,1,1,1,1 };
+            bitmap[9] = new int[] { 1,1,1,1,1,1,1,c,c };
 
-            var array1 = new int[] { 111101111 };
-            var array2 = new int[] { 110111011 };
-            var array3 = new int[] { 111100111 };
-            var array4 = new int[] { 110101011 };
+            var array1 = new int[] { 1,1,1,1,c,1,1,1,1 };
+            var array2 = new int[] { 1,1,c,1,1,1,c,1,1 };
+            var array3 = new int[] { 1,1,1,c,1,c,1,1,1 };
+            var array4 = new int[] { 1,1,c,1,c,1,c,1,1 };
 
             switch (card.Rank)
             {
                 case CardRank.Ten:
                     bitmap[3] = array4;
-                    bitmap[4] = array2;
+                    bitmap[4] = array4;
                     bitmap[5] = array4;
                     bitmap[6] = array1;
                     break;
@@ -105,8 +103,8 @@ namespace Blackjack
                     bitmap[5] = array1;
                     break;
                 case CardRank.Two:
-                    bitmap[3] = array2;
-                    bitmap[5] = array2;
+                    bitmap[3] = array1;
+                    bitmap[5] = array1;
                     break;
                 default:
                     bitmap[4] = array1;
