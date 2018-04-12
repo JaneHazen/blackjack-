@@ -13,7 +13,27 @@ namespace Blackjack
 
         public Graphic Generate(ICard card)
         {
-            throw new NotImplementedException();
+            Graphic cardGraphic;
+
+            if (card.IsHidden)
+            {
+                //  cardGraphic = new Graphic();
+            }
+
+            int number;
+
+            var results = int.TryParse(card.Name, number);
+
+            if (results)
+            {
+                //  cardGraphic = new Graphic();
+            }
+            else
+            {
+                //  cardGraphic = new Graphic();
+            }
+
+            return cardGraphic;
         }
 
         /// <summary>
