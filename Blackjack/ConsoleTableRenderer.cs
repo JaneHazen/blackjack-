@@ -76,6 +76,8 @@ namespace Blackjack
 
         public void Render()
         {
+            Console.WriteLine("Table Output coming");
+            return;
             throw new NotImplementedException();
         }
 

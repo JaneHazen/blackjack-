@@ -55,13 +55,13 @@ namespace Blackjack
         /// Console Messages:
         /// 
         /// 1) Enter your name
-        private const string ENTER_YOUR_NAME = " Enter Your Name";
+        private const string ENTER_YOUR_NAME = "Enter Your Name";
 
         /// <summary>
         /// Defualt constructor
         /// </summary>
         public GameManager() :this(
-                                   new BlackJackDeck(null), 
+                                   new BlackJackDeck(), 
                                    new Table(), 
                                    new ConsoleTableRenderer(),
                                    new ConsoleInputProvider(),
@@ -103,9 +103,17 @@ namespace Blackjack
         /// </summary>
         private void createPlayersForTable()
         {
-            outputProvider.Write($"How many players:");
-            var numsPlayer = 2;
+            outputProvider.Write($"How many players: ");
+            var numsPlayer = 1;
             Int32.TryParse(inputProvider.Read(), out numsPlayer);
+
+            if(numsPlayer == 0)
+            {
+                numsPlayer = 1;
+                outputProvider.WriteLine();
+                outputProvider.WriteLine($"Defaulting to {numsPlayer} players");
+            }
+
 
             this.players = new List<IPlayer>();
             for (int i = 0; i < numsPlayer; i++)
@@ -167,7 +175,7 @@ namespace Blackjack
                         outputProvider.Write(actionType);
                         outputProvider.Write(" ");
                     }
-
+                    outputProvider.WriteLine();
                     action = player.GetAction(moveProvider);
 
                     if (action == PlayerAction.hit)
@@ -249,7 +257,7 @@ namespace Blackjack
 
         private void welcomeMessage()
         {
-            outputProvider.WriteLine("******************Welcome to Black Jack Where you lose all Your Money*****************");
+            outputProvider.WriteLine("***************Welcome to Black Jack Where you lose all Your Money*****************");
         }
 
         private void updatePlayerGameState(IPlayer player)
@@ -328,6 +336,7 @@ namespace Blackjack
             {
                 player.Draw(deck, 2);
             }
+            dealer.Draw(deck, 2);
         }
     }
 }

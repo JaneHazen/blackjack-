@@ -21,10 +21,15 @@ namespace Blackjack
         /// <summary>
         /// The player's current set of cards
         /// </summary>
-        public List<IHand> PlayerHands { get; set; }
-        public GameState gameState { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public List<IHand> Cards { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public List<IHand> PlayerHands { get;}
+        public GameState gameState { get; set; }
+    
 
+
+        public HumanPlayer()
+        {
+            PlayerHands = new List<IHand>();
+        }
 
         /// <summary>
         /// Draw from the deck with specified amount . Added only to the first hand
