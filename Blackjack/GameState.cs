@@ -12,8 +12,10 @@ namespace Blackjack
         Started,
         WaitingForUserInput,
         PerformingMove,
-        CheckingForGameOver,
-        Draw,
-        Winner
+        GameOver,
+        InGame,
+        Push,
+        Winner,
+        BlackJack
     }
 }

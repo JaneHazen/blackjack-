@@ -53,10 +53,10 @@ namespace Blackjack.Tests
 
 
             //act
-            var noAcesHandExpected = noAcesHand.GetTotalValue();
+            var noAcesHandActual = noAcesHand.GetTotalValue();
 
             //assert
-            Assert.AreEqual();
+            Assert.AreEqual(noAcesHandExpected, noAcesHandActual);
         }
     }
 }

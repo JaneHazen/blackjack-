@@ -22,35 +22,40 @@ namespace Blackjack
         /// The player's current set of cards
         /// </summary>
         public List<IHand> PlayerHands { get; set; }
+        public GameState gameState { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public List<IHand> Cards { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-      
+
         /// <summary>
-        /// Draw from the deck with specified amount 
+        /// Draw from the deck with specified amount . Added only to the first hand
         /// </summary>
         /// <param name="deck"></param>
         /// <param name="amt"></param>
         public void Draw(IDeck deck, int amt)
         {
-
-            
+         
             for(var i = 0; i < amt; i++)
             {
                 var drawnCard = deck.Deal();
-                var hand;
+                
                 if(PlayerHands.Count == 0)
                 {
                    
+                    var hand = new Hand();
+                    PlayerHands.Add(hand);
                 }
+
+                PlayerHands[0].AddCard(deck.Deal());
             }
-           // Cards[amt].Add(drawnCard);
+         
         }
 
         /// <summary>
         /// The human player's action
         /// </summary>
-        public void GetAction()
+        public PlayerAction GetAction(IMove moveProvider)
         {
-
+            return moveProvider.GetMove();
         }
 
         /// <summary>

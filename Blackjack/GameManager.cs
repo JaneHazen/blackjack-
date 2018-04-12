@@ -1,19 +1,20 @@
-﻿using System;
+﻿using Blackjack.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blackjack.Interfaces
+namespace Blackjack
 {   /// <summary>
     /// This class will manage the game from start to finish
     /// </summary>
-    class GameManager
+    public class GameManager
     {
         /// <summary>
         /// This will hold the list of players
         /// </summary>
-        private IEnumerable<IPlayer> players;
+        private List<IPlayer> players;
 
         /// <summary>
         /// This will hold the Dealer instance
@@ -46,14 +47,26 @@ namespace Blackjack.Interfaces
         private IInputProvider inputProvider;
 
         /// <summary>
+        /// Move provider
+        /// </summary>
+        private IMove moveProvider;
+
+
+        /// Console Messages:
+        /// 
+        /// 1) Enter your name
+        private const string ENTER_YOUR_NAME = " Enter Your Name";
+
+        /// <summary>
         /// Defualt constructor
         /// </summary>
         public GameManager() :this(
-                                   new BlackJackDeck(), 
+                                   new BlackJackDeck(null), 
                                    new Table(), 
                                    new ConsoleTableRenderer(),
                                    new ConsoleInputProvider(),
-                                   new ConsoleOutputProvider())
+                                   new ConsoleOutputProvider(),
+                                   new MoveProvider(new ConsoleInputProvider()))
         {
 
            
@@ -70,17 +83,19 @@ namespace Blackjack.Interfaces
                             ITable table,
                             ITableRenderer tableRenderer,
                             IInputProvider inputProvider,
-                            IOutputProvider outputProvider
+                            IOutputProvider outputProvider,
+                            IMove moveProvider
                            )
         {
 
             this.table = table;
-            this.players = table.Players;
+            this.players = table.Players != null ? table.Players.ToList() : null;
             this.dealer = table.Dealer;
             this.tableRenderer = tableRenderer;
             this.deck = deckOfCards;
             this.inputProvider = inputProvider;
             this.outputProvider = outputProvider;
+            this.moveProvider = moveProvider;
           }     
         
         /// <summary>
@@ -88,7 +103,26 @@ namespace Blackjack.Interfaces
         /// </summary>
         private void createPlayersForTable()
         {
-            
+            outputProvider.Write($"How many players:");
+            var numsPlayer = 2;
+            Int32.TryParse(inputProvider.Read(), out numsPlayer);
+
+            this.players = new List<IPlayer>();
+            for (int i = 0; i < numsPlayer; i++)
+            {
+                var name = GetName();
+                this.players.Add(new HumanPlayer(name));
+            }
+
+            this.table.Players = this.players as IEnumerable<IPlayer>;
+        }
+
+        private string GetName()
+        {          
+            outputProvider.Write($"{ENTER_YOUR_NAME}: ");
+            string player = inputProvider.Read();
+            return player;
+
         }
 
         /// <summary>
@@ -97,7 +131,8 @@ namespace Blackjack.Interfaces
         /// </summary>
         private void createDealerForTable()
         {
-            throw new NotImplementedException();
+            this.dealer = new BlackjackDealer();
+            this.table.Dealer =  this.dealer;
         }
 
         /// <summary>
@@ -113,21 +148,41 @@ namespace Blackjack.Interfaces
 
             DealFristTwoCards();
 
+            updatePlayerGameStateForTheFirstTwoCard();
+
             tableRenderer.Table = table;
             tableRenderer.Render();
+
            
             foreach(var player in players)  
             {
-            
-              
-                outputProvider.WriteLine($"{player.Name}")
+                PlayerAction action = PlayerAction.hit;
 
+                do
+                {
+                    outputProvider.WriteLine($"{player.Name}  enter one of the following options: ");
 
-                
+                    foreach (var actionType in Enum.GetNames(typeof(PlayerAction)))
+                    {
+                        outputProvider.Write(actionType);
+                        outputProvider.Write(" ");
+                    }
+
+                    action = player.GetAction(moveProvider);
+
+                    if (action == PlayerAction.hit)
+                    {
+                        player.Draw(deck, Constant.DRAW_ONE);
+                        updatePlayerGameState(player);
+                        tableRenderer.Render();
+                    }
+
+                    if (player.gameState == GameState.GameOver)
+                        break;
+
+                } while (action == PlayerAction.hit);
 
                 //Check BlackJack win situation
-
-
                 //Start the game loop here
                 //get a player from the list in round robin
 
@@ -142,28 +197,138 @@ namespace Blackjack.Interfaces
                 //if needed->determine loss or ask player to new move 
                 //if stand return 
                 // go the next player.
-                
+            }
 
+            showDealerHand();
+            tableRenderer.Render();
+            
+            while(dealer.PlayerHands[0].GetTotalValue() < Constant.DEALERMINHANDVALUE)
+            {
+                //TODO may need a delay
+                dealer.Draw(deck, Constant.DRAW_ONE);
+                tableRenderer.Render();
+            }
+            updatePlayerGameState(dealer);
+
+            if(dealer.PlayerHands[0].GetTotalValue() > Constant.BLACKJACK)
+            {
+                updateWinWhenDealerBusted();
+            }
+            else
+            {
+                updateWinDealerAgainstPlayer();
+            }
+            
+            
+        }
+
+        private void showDealerHand()
+        {
+            foreach (var card in dealer.PlayerHands[0].Cards)
+            {
+                card.IsHidden = false;
+            }
+        }
+
+        private void updatePlayerGameStateForTheFirstTwoCard()
+        {
+            foreach (var player in players)
+            {
+                
+                if (player.PlayerHands[0].GetTotalValue() == Constant.BLACKJACK)
+                {
+                    player.gameState = GameState.BlackJack;
+                }
+
+                if (player.PlayerHands[0].GetTotalValue() > Constant.BLACKJACK)
+                {
+                    player.gameState = GameState.GameOver;
+                }
             }
         }
 
         private void welcomeMessage()
         {
-            throw new NotImplementedException();
+            outputProvider.WriteLine("******************Welcome to Black Jack Where you lose all Your Money*****************");
         }
 
-        public void CheckIfWin(IHand dealerHand, IHand playerHand )
+        private void updatePlayerGameState(IPlayer player)
         {
-            
+           
+            if (player.PlayerHands[0].GetTotalValue() <= Constant.BLACKJACK)
+            {
+                player.gameState = GameState.InGame;
+            }
+
+            if (player.PlayerHands[0].GetTotalValue() > Constant.BLACKJACK)
+            {
+                player.gameState = GameState.GameOver;
+            }
         }
-    }
-}
+
+        /// <summary>
+        ///  To compare player against the dealer
+        /// </summary>
+        /// <param name="dealerHand"></param>
+        /// <param name="playerHand"></param>
+        private void updateWinDealerAgainstPlayer()
+        {
+            var dealHandTotal = dealer.PlayerHands[0].GetTotalValue();
+            foreach(var player in players)
+            {
+                if (player.gameState != GameState.GameOver)
+                {
+                    var playerHandTotal = player.PlayerHands[0].GetTotalValue();
+
+                    if (playerHandTotal > dealHandTotal)
+                    {
+                        player.gameState = GameState.Winner;
+                    }
+
+                    if (playerHandTotal == dealHandTotal)
+                    {
+                        player.gameState = GameState.Push;
+                    }
+                    else
+                    {
+                        player.gameState = GameState.GameOver;
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// check if the player won the game when the dealer is out
+        /// </summary>
+        /// <param name="playerHand"></param>
+        private void updateWinWhenDealerBusted()
+        {
+            foreach (var player in players)
+            {
+                if (player.gameState != GameState.GameOver)
+                {
+                    var playerHandTotal = player.PlayerHands[0].GetTotalValue();
+
+                    if (playerHandTotal <= Constant.BLACKJACK)
+                    {
+                        player.gameState = GameState.Winner;
+                    }                    
+                    else
+                    {
+                        player.gameState = GameState.GameOver;
+                    }
+                }
+            }
+        }
         /// <summary>
         /// This function deals out the first two card playes and dealer
         /// </summary>
         private void DealFristTwoCards()
         {
-            throw new NotImplementedException();
+            foreach (var player in players)
+            {
+                player.Draw(deck, 2);
+            }
         }
     }
 }
+
