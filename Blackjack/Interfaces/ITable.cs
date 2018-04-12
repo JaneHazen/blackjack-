@@ -19,12 +19,12 @@ namespace Blackjack.Interfaces
         /// For MVP, there is only one player in this list.
         /// We get the hands to display from Players.
         /// </summary>
-        IEnumerable<IPlayer> Players { get; } 
+        IEnumerable<IPlayer> Players { get; set; } 
 
         /// <summary>
         /// The dealer in the current round to be rendered.
         /// We get the dealer's hand to display from Dealer 
         /// </summary>
-        IPlayer Dealer { get; } 
+        IPlayer Dealer { get; set; } 
     }
 }
