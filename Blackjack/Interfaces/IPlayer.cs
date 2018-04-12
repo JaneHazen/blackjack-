@@ -19,13 +19,17 @@ namespace Blackjack.Interfaces
        /// <summary>
        ///  The player's hand
        /// </summary>
-       // List<IHand> Cards { get; set; }
+        List<IHand> Cards { get; set; }
 
-         /// <summary>
-       ///  The player's draw method to take cards from deck
-       /// </summary>
-       void Draw();//draw from Ideck)
+        /// <summary>
+        ///  The player's draw method to take cards from deck
+        /// </summary>
+        void Draw(IDeck deck, int amt);//draw from Ideck)
 
+        /// <summary>
+        /// Defines the actions(hit, stand) taken on by the player 
+        /// </summary>
+        void GetAction(); 
 
     }
 }
