@@ -78,6 +78,11 @@ namespace Blackjack
             }
         }
 
+        /// <summary>
+        /// Speeds up generating cards a little by providing a template of the proper size
+        /// </summary>
+        public static int[][] CardTemplate = new int[10][];
+
         public Graphic(int[][] bitmap)
         {
             Bitmap = bitmap;
