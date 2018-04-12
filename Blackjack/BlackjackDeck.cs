@@ -10,7 +10,7 @@ namespace Blackjack
     /// <summary>
     /// The deck of cards
     /// </summary>
-    public class BlackjackDeck : IDeck
+    public class BlackJackDeck : IDeck
     {
         /// <summary>
         /// The available cards 
@@ -21,7 +21,7 @@ namespace Blackjack
         /// Constructor which adds cards to deck
         /// </summary>
         /// <param name="cards"></param>
-        public BlackjackDeck(List<ICard> cards)
+        public BlackJackDeck(List<ICard> cards)
         {
             this.Cards = cards;
         }
