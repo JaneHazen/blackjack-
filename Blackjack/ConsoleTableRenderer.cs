@@ -69,10 +69,18 @@ namespace Blackjack
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// A method for rendering each hand and the points on it
+        /// </summary>
+        /// <param name="player">The player of the hand being rendered</param>
+        /// <param name="points">The points on the hand
+        /// ***! ----->>> Once we have the full code
+        /// for IHand, we won't need this argument bc hands will have 
+        /// points associated with them!</param>
         public void RenderHandAndPoints(IPlayer player, int points)
         {
             var hand = player.Cards;
-            var name = player.Name;
+            var name = player.Name.ToUpper();
 
             IOutputProvider outputProvider = new ConsoleOutputProvider();
 
@@ -80,6 +88,7 @@ namespace Blackjack
 
             outputProvider.WriteLine(border);
             outputProvider.WriteLine();
+            outputProvider.WriteLine($"{name}'s Hand");
 
             foreach (ICard card in hand)
             {
@@ -89,7 +98,7 @@ namespace Blackjack
             }
 
             outputProvider.WriteLine();
-            outputProvider.Write($"{name.ToUpper()} Points: {points}");
+            outputProvider.Write($"{name} Points: {points}");
             outputProvider.WriteLine();
             outputProvider.WriteLine(border);
         }
