@@ -12,19 +12,17 @@ namespace Blackjack.Tests
         {
             //Arrange 
             var expectedSuit = CardSuit.Club;
-            var expectedName = "King";
+            var expectedRank = CardRank.King;
             var expectedValue = 10;
             var expectedIsHidden = true;
-
-            var name = "King";
             var value = 10;
 
             //Act 
-            Card myCard = new Card(CardSuit.Club, name, value);
+            Card myCard = new Card(CardSuit.Club, CardRank.King, value);
 
             //Arrange 
             Assert.AreEqual(expectedSuit, myCard.Suit);
-            Assert.AreEqual(expectedName, myCard.Name);
+            Assert.AreEqual(expectedRank, myCard.Rank);
             Assert.AreEqual(expectedValue, myCard.Value);
             Assert.AreEqual(expectedIsHidden, myCard.IsHidden);
             

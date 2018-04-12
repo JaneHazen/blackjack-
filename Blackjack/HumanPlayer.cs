@@ -56,6 +56,7 @@ namespace Blackjack
             }
             this.Name = name;
             this.Cards = new List<IHand>();
+            //Cards.Add(new Hand());
             //will need to add cards from new instance of hand concrete class
         }
 
