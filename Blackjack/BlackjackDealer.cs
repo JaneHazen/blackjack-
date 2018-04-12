@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Blackjack
 {
-    public class BlackjackDealer //: IPlayer
+    public class BlackjackDealer : HumanPlayer, IPlayer
     {
-        //public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        //public List<IHand> Cards { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        //public void Draw( IDeck deck , int amt ) => throw new NotImplementedException();
-        //public void GetAction() => throw new NotImplementedException();
+        
+        public BlackjackDealer(): base("Adam The Dealer")
+        {             
+            
+        }
     }
 }

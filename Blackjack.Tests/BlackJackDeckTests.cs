@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Blackjack.Interfaces;
+﻿using Blackjack.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Blackjack.Tests
 {
@@ -19,8 +18,8 @@ namespace Blackjack.Tests
             var wrongNumberOfCards = 50;
 
             //act
-            var deck = new BlackjackDeck();
-            var deck2 = new BlackjackDeck();
+            var deck = new BlackJackDeck();
+            var deck2 = new BlackJackDeck();
             var actualCardsNum = deck.Cards.Count();
             var deck2ActualCardsNum = deck2.Cards.Count();
 
@@ -37,7 +36,7 @@ namespace Blackjack.Tests
             var expectedCard = cardToAdd.Object;
 
             //act
-            var deck = new BlackjackDeck(new List<ICard> { expectedCard });
+            var deck = new BlackJackDeck(new List<ICard> { expectedCard });
             var actualCard = deck.Cards.Last();
 
             //assert
@@ -48,7 +47,7 @@ namespace Blackjack.Tests
         public void TestBlackjackDeckDeal()
         {
             //arrange
-            var deck = new BlackjackDeck();
+            var deck = new BlackJackDeck();
             var expectedCard = deck.Cards.Last();
             var expectedNumberOfCards = deck.Cards.Count() -1;
 
@@ -65,7 +64,7 @@ namespace Blackjack.Tests
         public void TestBlackjackDeckEmpty()
         {
             //arrange
-            var deck = new BlackjackDeck();
+            var deck = new BlackJackDeck();
             var expectedCount = 0;
 
             //act
@@ -80,15 +79,16 @@ namespace Blackjack.Tests
         public void TestBlackjackDeckShuffle()
         {
             //arrange
-            var deck = new BlackjackDeck();
-            var deck2 = new BlackjackDeck();
-            
+            var deck = new BlackJackDeck();
+            var pickedCardFromDeck = deck.Cards[6];
+
             //act
             
             deck.Shuffle();
-         
+            var pickedCardFromShuffledDeck = deck.Cards[6];
+
             //assert
-            Assert.AreNotEqual(deck , deck2);
+           /// Assert.AreNotSame(pickedCardFromDeck , pickedCardFromShuffledDeck);
         }
     }
 }
