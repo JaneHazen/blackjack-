@@ -17,16 +17,35 @@ namespace Blackjack.Interfaces
         Spade
     }
 
-    /// <summary>
-    /// This interface set fields to generate cards
-    /// </summary>
+    public enum CardRank
+    {
+        Ace,
+        Two,
+        Three,
+        Four,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
+        Jack,
+        Queen,
+        King
+    }
+
     public interface ICard
 
     {
        /// <summary>
        /// The suit of the card
        /// </summary>
-        CardSuit Suit { get; set; }
+       CardSuit Suit { get; set; }
+
+       /// <summary>
+       /// The rank of the cards, from ace to king
+       /// </summary>
+       CardRank Rank { get; set; }
       
         /// <summary>
         /// The Name of the Class

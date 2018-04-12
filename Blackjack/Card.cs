@@ -14,6 +14,11 @@ namespace Blackjack
         /// </summary>
         public CardSuit Suit { get; set; }
         /// <summary>
+        /// Rank of the cars, from ace to king
+        /// </summary>
+        public CardRank Rank { get; set; }
+
+        /// <summary>
         /// Name of the Card e: King
         /// </summary>
         public string Name { get; set; }
@@ -27,6 +32,7 @@ namespace Blackjack
         /// Reveals if the card is face Up or Down
         /// </summary>
         public bool IsHidden { get; set; }
+        
 
         /// <summary>
         /// Card Cosntructor sets suit, name, value and isHidden
@@ -34,10 +40,10 @@ namespace Blackjack
         /// <param name="suit"></param>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public Card(CardSuit suit, string name, int value)
+        public Card(CardSuit suit, CardRank rank, int value)
         {
             Suit = suit;
-            Name = name;
+            Rank = rank;
             Value = value;
             IsHidden = true;
         }
