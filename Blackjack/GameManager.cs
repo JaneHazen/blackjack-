@@ -64,6 +64,9 @@ namespace Blackjack.Interfaces
             throw new NotImplementedException();
         }
 
-
+        public void CheckIfWin(IHand dealerHand, IHand playerHand )
+        {
+            
+        }
     }
 }
