@@ -31,14 +31,16 @@ namespace Blackjack.Interfaces
         /// Our main rendering method, for drawing the player's cards and points
         /// </summary>
         /// <param name="player"></param>
-        void RenderHandAndPoints(IPlayer player);
+        /// <param points>Only exists bc waiting to get IHand code with a points
+        /// member...</param>
+        void RenderHandAndPoints(IPlayer player, int points);
 
         /// <summary>
-        /// Renders a 2-D string array -- "rendering" strings or 1-D arrays is for
+        /// Renders a 2-D array -- "rendering" strings or 1-D arrays is for
         /// The output provider
         /// </summary>
         /// <param name="graphic"></param>
-        void Render(string[,] graphic);
+        void Render(Graphic graphic);
 
         /// <summary>
         /// Renders the table base on the Table properites
@@ -54,7 +56,7 @@ namespace Blackjack.Interfaces
         /// <param name="card">The card that will generate a graphical 
         /// representation</param>
         /// <returns>A 2-D string array representing the card</returns>
-        String[,] Generate(ICard card);
+        Graphic Generate(ICard card);
 
         /// <summary>
         /// A method that generates a series of chars to fill a single line.
@@ -73,7 +75,19 @@ namespace Blackjack.Interfaces
         /// </summary>
         /// <param name="graphic">A 2-D array representing the graphic</param>
         /// <returns>A colored 2-D string array representing the graphic</returns>
-        String[,] Generate(int[][] graphic);
+        Graphic Generate(int[][] graphic);
 
+        /// <summary>
+        /// A method for rendering the whole table, with all players and the dealer
+        /// </summary>
+        /// <param name="players">A collection of *active* players to render</param>
+        /// <param name="playerPoints">A collection listing all the player's points.
+        /// *** --->>> Once hands have a points member REMOVE</param>
+        /// <param name="dealer">The dealer</param>
+        /// <param name="dealerPoints"> The dealer's points       
+        /// *** --->>> Once hands have a points member REMOVE</param>
+
+        void RenderWholeTable(IEnumerable<IPlayer> players, IEnumerable<int> playerPoints, IPlayer dealer, int dealerPoints);
     }
+
 }
