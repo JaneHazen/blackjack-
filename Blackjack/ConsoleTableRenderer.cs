@@ -51,10 +51,10 @@ namespace Blackjack
         }
 
         /// <summary>
-        /// Generated ASCII border of characters when given a char input 
+        /// Generates an ASCII border of characters when given a char input 
         /// </summary>
         /// <param name="border"> The character to make the border</param>
-        /// <returns>The 80 character string</returns>
+        /// <returns>The character string</returns>
         public string Generate(char border)
         {
             var length = Console.WindowWidth;
@@ -63,11 +63,23 @@ namespace Blackjack
             return horizontalRule;
         }
 
+        /// <summary>
+        /// Generates a graphic from a 2D array. Really just a wrapper for the
+        /// graphic constructer
+        /// </summary>
+        /// <param name="graphic"></param>
         public Graphic Generate(int[][] graphic)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gives you ConsoleColors based on BlackJack Colors.
+        /// We couldn't use ConsoleColors in out graphics directly, because some of
+        /// them have confusing names, or raw enum values that contain multiple digits
+        /// </summary>
+        /// <param name="color">The color to display in console</param>
+        /// <returns></returns>
         public ConsoleColor Paint(Color color)
         {
             switch (color)
@@ -98,6 +110,10 @@ namespace Blackjack
             }
         }
 
+        /// <summary>
+        /// Renders a graphic.
+        /// </summary>
+        /// <param name="graphic">An object containing a map of colors</param>
         public void Render(Graphic graphic)
         {
             throw new NotImplementedException();
@@ -114,7 +130,8 @@ namespace Blackjack
         public void RenderHandAndPoints(IPlayer player, int points)
         {
             var hand = player.Cards;
-            var name = player.Name.ToUpper();
+            // This complicated bullshit is just capitalizing the first letter of the player's name
+            var name = $"{player.Name.Substring(0, 1).ToUpper()}{player.Name.Substring(1, player.Name.Length - 1).ToLower()}";
 
             IOutputProvider outputProvider = new ConsoleOutputProvider();
 
@@ -128,6 +145,7 @@ namespace Blackjack
             {
                 var cardGraphic = Generate(card);
                 Render(cardGraphic);
+                // This creates a 2 character-wide space between cards in the hand
                 outputProvider.Write("  ");
             }
 
@@ -146,14 +164,18 @@ namespace Blackjack
         /// <param name="dealer">The dealer</param>
         /// <param name="dealerPoints"> The dealer's points       
         /// *** --->>> Once hands have a points member REMOVE</param>
-
         public void RenderWholeTable(IEnumerable<IPlayer> players, IEnumerable<int> playerPoints, IPlayer dealer, int dealerPoints)
         {
+            // This holds all the players, including the dealer, for the caller's
+            // convenience
             List<IPlayer> allTogetherNow = new List<IPlayer>();
 
             allTogetherNow = players.Select(x => x).ToList();
             allTogetherNow.Add(dealer);
 
+            // This holds all the points. We only only only have it because we're
+            // waiting on IHand to have a points member added. Once we get that,
+            // we can call the points from the player's hand
             List<int> allThePoints = new List<int>();
 
             allThePoints = playerPoints.Select(x => x).ToList();
