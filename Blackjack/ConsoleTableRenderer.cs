@@ -206,6 +206,13 @@ namespace Blackjack
             throw new NotImplementedException();
         }
 
+        public void Render()
+        {
+            var dealer = this.Table.Dealer;
+            var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
+            RenderHandAndPoints(this.Table.Dealer, dealerPoint);
+        }
+
         /// <summary>
         /// A method for rendering each hand and the points on it
         /// </summary>
@@ -216,7 +223,7 @@ namespace Blackjack
         /// points associated with them!</param>
         public void RenderHandAndPoints(IPlayer player, int points)
         {
-            var hand = player.Cards;
+            var hand = player.PlayerHands[0];
             // This complicated bullshit is just capitalizing the first letter of the player's name
             var name = $"{player.Name.Substring(0, 1).ToUpper()}{player.Name.Substring(1, player.Name.Length - 1).ToLower()}";
 
@@ -228,7 +235,7 @@ namespace Blackjack
             outputProvider.WriteLine();
             outputProvider.WriteLine($"{name}'s Hand");
 
-            foreach (ICard card in hand)
+            foreach (ICard card in hand.Cards)
             {
                 var cardGraphic = Generate(card);
                 Render(cardGraphic);

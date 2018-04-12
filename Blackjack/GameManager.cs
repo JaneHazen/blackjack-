@@ -90,7 +90,7 @@ namespace Blackjack
 
             this.table = table;
             this.players = table.Players != null ? table.Players.ToList() : null;
-            this.dealer = table.Dealer;
+            this.dealer = table.Dealer != null ? table.Dealer : null;
             this.tableRenderer = tableRenderer;
             this.deck = deckOfCards;
             this.inputProvider = inputProvider;
@@ -107,7 +107,7 @@ namespace Blackjack
             var numsPlayer = 1;
             Int32.TryParse(inputProvider.Read(), out numsPlayer);
 
-            if(numsPlayer == 0)
+            if(numsPlayer <= 0)
             {
                 numsPlayer = 1;
                 outputProvider.WriteLine();
