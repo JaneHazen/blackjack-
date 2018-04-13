@@ -209,7 +209,9 @@ namespace Blackjack
         public void Render()
         {
             var dealer = this.Table.Dealer;
-            var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
+            //Dealer points only show the value of one
+            //var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
+            var dealerPoint = dealer.PlayerHands[0].Cards[0].Value;
             var dealerCards = dealer.PlayerHands[0].Cards;
 
 
@@ -218,10 +220,9 @@ namespace Blackjack
             Console.WriteLine($"Dealer Name: {dealer.Name}" );
             Console.WriteLine($"Dealer Points: {dealerPoint}");
             Console.WriteLine("----- Dealer Hand -------");
-            foreach(ICard card in dealerCards)
-            {
-                Console.WriteLine(card); 
-            }
+            //Rendering dealer card
+            Console.WriteLine(dealerCards[0].ToString());
+     
 
             Console.WriteLine("--------------------------------Player Details-------------------------------------------");
 
