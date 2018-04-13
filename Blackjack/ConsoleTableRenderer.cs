@@ -209,7 +209,9 @@ namespace Blackjack
         public void Render()
         {
             var dealer = this.Table.Dealer;
-            var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
+            //Dealer points only show the value of one
+            //var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
+            var dealerPoint = dealer.PlayerHands[0].Cards[0].Value;
             var dealerCards = dealer.PlayerHands[0].Cards;
 
             Console.WriteLine();
