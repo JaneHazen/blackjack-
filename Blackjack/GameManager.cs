@@ -1,4 +1,5 @@
-﻿using Blackjack.Interfaces;
+﻿using Blackjack.Exceptions;
+using Blackjack.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -171,15 +172,21 @@ namespace Blackjack
 
                 playTurn();
 
-               // showDealerHand();
+                showDealerHand();
                 tableRenderer.RenderWholeTable();
 
-                while (dealer.PlayerHands[0].GetTotalValue() < Constant.DEALERMINHANDVALUE)
+                //Check if Any Player is in the game then force the Dealer to draw if neeed
+                if (checkIfAnyPlayerIsInGame())
                 {
-                    //TODO may need a delay
-                    dealer.Draw(deck, Constant.DRAW_ONE);
-                    tableRenderer.RenderWholeTable();
+
+                    while (dealer.PlayerHands[0].GetTotalValue() < Constant.DEALERMINHANDVALUE)
+                    {
+                        //TODO may need a delay
+                        dealer.Draw(deck, Constant.DRAW_ONE);
+                        tableRenderer.RenderWholeTable();
+                    }
                 }
+
                 updatePlayerGameState(dealer);
 
                 if (dealer.PlayerHands[0].GetTotalValue() > Constant.BLACKJACK)
@@ -211,6 +218,21 @@ namespace Blackjack
             outputProvider.WriteLine("Thanks for Playing the Game!");
         }
 
+        private bool checkIfAnyPlayerIsInGame()
+        {
+            
+            foreach (var player in players)
+            {
+
+                if (player.gameState != GameState.GameOver)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void playTurn()
         {
             foreach (var player in players)
@@ -219,6 +241,7 @@ namespace Blackjack
 
                 do
                 {
+                    outputProvider.WriteLine($"{player.Name}  Your Points: {player.PlayerHands[0].GetTotalValue()}");
                     outputProvider.WriteLine($"{player.Name}  enter one of the following options: ");
 
                     foreach (var actionType in Enum.GetNames(typeof(PlayerAction)))
@@ -227,8 +250,18 @@ namespace Blackjack
                         outputProvider.Write(" ");
                     }
 
+                    
+
                     outputProvider.WriteLine();
-                    action = player.GetAction(moveProvider);
+                    try
+                    {
+                        action = player.GetAction(moveProvider);
+                    }
+                    catch (InvalidInputException)
+                    {
+                        continue;
+
+                    }
 
                     if (action == PlayerAction.hit)
                     {
@@ -288,7 +321,7 @@ namespace Blackjack
         private void welcomeMessage()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            outputProvider.Write(tableRenderer.Generate('$'));
+            outputProvider.WriteLine(tableRenderer.Generate('$'));
             Console.ForegroundColor = ConsoleColor.White;
             outputProvider.WriteLine("Welcome to Black Jack, where you lose all your money");
             Console.ForegroundColor = ConsoleColor.Green;
@@ -372,7 +405,7 @@ namespace Blackjack
                 player.Draw(deck, 2);
             }
             dealer.Draw(deck, 2);
-            //dealer.PlayerHands[0].Cards[1].IsHidden = true;
+            dealer.PlayerHands[0].Cards[1].IsHidden = true;
         }
     }
 }

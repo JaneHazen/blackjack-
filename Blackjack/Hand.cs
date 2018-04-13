@@ -77,5 +77,16 @@ namespace Blackjack
             //just shove it on the list and don't return anything
             Cards.Add(card);
         }
+
+        public int GetTotalHiddenValue()
+        {
+            var sum = 0;
+            foreach (ICard card in Cards)
+            {               
+                if (card.IsHidden)
+                    sum += card.Value;              
+            }
+            return sum;
+        }
     }
 }

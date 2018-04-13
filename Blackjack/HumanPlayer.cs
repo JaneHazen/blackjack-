@@ -82,7 +82,8 @@ namespace Blackjack
         public override string ToString()
         {
             string status = this.gameState.ToString();
-            string playerStatus = this.Name + " Game status: " + status;
+            string formatedName = $"{Name.Substring(0, 1).ToUpper()}{Name.Substring(1, Name.Length - 1).ToLower()}";
+            string playerStatus = formatedName + " Game status: " + status;
             return playerStatus;
 
         }
