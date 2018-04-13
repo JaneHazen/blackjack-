@@ -148,21 +148,68 @@ namespace Blackjack
         /// </summary>
         public void StartGame()
         {
+            outputProvider.WriteLine();
             welcomeMessage();
+            outputProvider.WriteLine();
 
-            createDealerForTable();
+            for (var round = 1; round < 2; round++)
+            {
+                deck = new BlackJackDeck();
+                deck.Shuffle();
 
-            createPlayersForTable();
+                createDealerForTable();
 
-            DealFristTwoCards();
+                createPlayersForTable();
 
-            updatePlayerGameStateForTheFirstTwoCard();
+                DealFristTwoCards();
 
-            tableRenderer.Table = table;
-            tableRenderer.Render();
+                updatePlayerGameStateForTheFirstTwoCard();
 
-           
-            foreach(var player in players)  
+                tableRenderer.Table = table;
+                tableRenderer.Render();
+
+                playTurn();
+
+                showDealerHand();
+                tableRenderer.Render();
+
+                while (dealer.PlayerHands[0].GetTotalValue() < Constant.DEALERMINHANDVALUE)
+                {
+                    //TODO may need a delay
+                    dealer.Draw(deck, Constant.DRAW_ONE);
+                    tableRenderer.Render();
+                }
+                updatePlayerGameState(dealer);
+
+                if (dealer.PlayerHands[0].GetTotalValue() > Constant.BLACKJACK)
+                {
+                    updateWinWhenDealerBusted();
+                }
+                else
+                {
+                    updateWinDealerAgainstPlayer();
+                }
+
+                tableRenderer.Render();
+
+                outputProvider.WriteLine();
+                outputProvider.WriteLine("Do you want to play one more round? Y/N");
+
+                var result = inputProvider.Read();
+
+                if(result.Contains("N") || result.Contains("n"))
+                {
+                    break;
+                }
+            }
+
+            outputProvider.WriteLine("***Thanks for Playing the Game********");
+
+        }
+
+        private void playTurn()
+        {
+            foreach (var player in players)
             {
                 PlayerAction action = PlayerAction.hit;
 
@@ -206,28 +253,6 @@ namespace Blackjack
                 //if stand return 
                 // go the next player.
             }
-
-            showDealerHand();
-            tableRenderer.Render();
-            
-            while(dealer.PlayerHands[0].GetTotalValue() < Constant.DEALERMINHANDVALUE)
-            {
-                //TODO may need a delay
-                dealer.Draw(deck, Constant.DRAW_ONE);
-                tableRenderer.Render();
-            }
-            updatePlayerGameState(dealer);
-
-            if(dealer.PlayerHands[0].GetTotalValue() > Constant.BLACKJACK)
-            {
-                updateWinWhenDealerBusted();
-            }
-            else
-            {
-                updateWinDealerAgainstPlayer();
-            }
-            
-            
         }
 
         private void showDealerHand()
@@ -288,6 +313,8 @@ namespace Blackjack
                 {
                     var playerHandTotal = player.PlayerHands[0].GetTotalValue();
 
+                    player.gameState = GameState.GameOver;
+
                     if (playerHandTotal > dealHandTotal)
                     {
                         player.gameState = GameState.Winner;
@@ -297,10 +324,7 @@ namespace Blackjack
                     {
                         player.gameState = GameState.Push;
                     }
-                    else
-                    {
-                        player.gameState = GameState.GameOver;
-                    }
+                   
                 }
             }
         }
