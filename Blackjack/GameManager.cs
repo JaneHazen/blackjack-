@@ -148,6 +148,7 @@ namespace Blackjack
         /// </summary>
         public void StartGame()
         {
+            Console.Clear();
             outputProvider.WriteLine();
             welcomeMessage();
             outputProvider.WriteLine();
@@ -199,6 +200,7 @@ namespace Blackjack
 
                 if(result.Contains("N") || result.Contains("n"))
                 {
+                    Console.Clear();
                     break;
                 }
             }
@@ -286,7 +288,7 @@ namespace Blackjack
         private void welcomeMessage()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            outputProvider.WriteLine(tableRenderer.Generate('$'));
+            outputProvider.Write(tableRenderer.Generate('$'));
             Console.ForegroundColor = ConsoleColor.White;
             outputProvider.WriteLine("Welcome to Black Jack, where you lose all your money");
             Console.ForegroundColor = ConsoleColor.Green;
