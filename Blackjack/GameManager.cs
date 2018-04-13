@@ -202,7 +202,7 @@ namespace Blackjack
                     break;
                 }
             }
-
+             
             outputProvider.WriteLine("***Thanks for Playing the Game********");
 
         }
