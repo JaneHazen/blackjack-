@@ -208,41 +208,10 @@ namespace Blackjack
 
         public void Render()
         {
-            var dealer = this.Table.Dealer;
-            //Dealer points only show the value of one
-            //var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
-            var dealerPoint = dealer.PlayerHands[0].Cards[0].Value;
-            var dealerCards = dealer.PlayerHands[0].Cards;
 
+            TempRenderDealerTable();
+            TimeDelay();
 
-
-
-            Console.WriteLine($"Dealer Name: {dealer.Name}" );
-            Console.WriteLine($"Dealer Points: {dealerPoint}");
-            Console.WriteLine("----- Dealer Hand -------");
-            //Rendering dealer card
-            Console.WriteLine(dealerCards[0].ToString());
-     
-
-            Console.WriteLine("--------------------------------Player Details-------------------------------------------");
-
-            var players = this.Table.Players;
-
-            foreach (var player in players)
-            {
-                var playerePoint = player.PlayerHands[0].GetTotalValue();
-                var playerCards = player.PlayerHands[0].Cards;
-              
-                Console.WriteLine($"Player Name: {player.Name}");
-                Console.WriteLine($"Player Points: {playerePoint}");
-                Console.WriteLine("----- Player Hand -------");
-                foreach (ICard card in playerCards)
-                {
-                    Console.WriteLine(card);
-                }
-
-                Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            }
 
 
             //TODO replace later with graphic version
@@ -258,6 +227,60 @@ namespace Blackjack
         /// ***! ----->>> Once we have the full code
         /// for IHand, we won't need this argument bc hands will have 
         /// points associated with them!</param>
+        /// 
+
+        public void TimeDelay()
+        {
+            var t = Task.Run(async delegate
+            {
+                await Task.Delay(TimeSpan.FromSeconds(2));
+                TempRenderPlayerHands();
+            });
+            t.Wait();
+        }
+
+        public void TempRenderPlayerHands()
+        {
+
+            Console.WriteLine("--------------------------------Player Details-------------------------------------------");
+
+            var players = this.Table.Players;
+
+            foreach (var player in players)
+            {
+                var playerePoint = player.PlayerHands[0].GetTotalValue();
+                var playerCards = player.PlayerHands[0].Cards;
+
+                Console.WriteLine($"Player Name: {player.Name}");
+                Console.WriteLine($"Player Points: {playerePoint}");
+                Console.WriteLine("----- Player Hand -------");
+                foreach (ICard card in playerCards)
+                {
+                    Console.WriteLine(card);
+                }
+
+                Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            }
+        }
+        public void TempRenderDealerTable()
+        {
+            var t = Task.Run(async delegate
+            {
+                var dealer = this.Table.Dealer;
+                //Dealer points only show the value of one
+                //var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
+                var dealerPoint = dealer.PlayerHands[0].Cards[0].Value;
+                var dealerCards = dealer.PlayerHands[0].Cards;
+                await Task.Delay(TimeSpan.FromSeconds(2));
+                Console.WriteLine($"Dealer Name: {dealer.Name}");
+                Console.WriteLine($"Dealer Points: {dealerPoint}");
+                Console.WriteLine("----- Dealer Hand -------");
+                //Rendering dealer card
+                Console.WriteLine(dealerCards[0].ToString());
+                return; 
+            });
+            t.Wait();
+        }
         public void RenderHandAndPoints(IPlayer player, int points)
         {
             var hand = player.PlayerHands[0];
