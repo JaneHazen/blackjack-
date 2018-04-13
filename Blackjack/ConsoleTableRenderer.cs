@@ -34,7 +34,7 @@ namespace Blackjack
 
             if (card.IsHidden)
             {
-                for (int i = 0; i <= 9; i++)
+                for (int i = 0; i <= bitmap.Length; i++)
                 {
                     bitmap[i] = new int[] { 7,7,7,7,7,7,7,7,7 };
                 }
@@ -75,7 +75,7 @@ namespace Blackjack
             switch (card.Rank)
             {
                 case CardRank.Ace:
-                    bitmap[2] = array0;
+                    bitmap[3] = array0;
                     bitmap[4] = array1;
                     bitmap[5] = array0;
                     bitmap[6] = array0;
@@ -313,13 +313,18 @@ namespace Blackjack
 
                     var digit = card.Rank;
 
+                    if (digit != CardRank.Ten)
+                    {
+                        Console.Write(suitSymbol);
+                    }
+
                     if ((int)digit == 1)
                     {
-                        Console.Write("A");
+                        Console.WriteLine("A");
                     }
                     else if ((int)digit <= 9)
                     {
-                        Console.Write((int)digit);
+                        Console.WriteLine((int)digit);
                     }
 
                     else
@@ -330,13 +335,8 @@ namespace Blackjack
                         }
                         else
                         {
-                            Console.Write(digit.ToString().Substring(0, 1).ToUpper());
+                            Console.WriteLine(digit.ToString().Substring(0, 1).ToUpper());
                         }
-                    }
-
-                    if (digit != CardRank.Ten)
-                    {
-                        Console.WriteLine(suitSymbol);
                     }
                 }
                 else
@@ -481,11 +481,14 @@ namespace Blackjack
 
             outputProvider.WriteLine();
 
-            var border = Generate('*');
+            var border = Generate('$');
 
+            Console.ForegroundColor = ConsoleColor.Green;
             outputProvider.WriteLine(border);
+            Console.ForegroundColor = ConsoleColor.White;
             outputProvider.WriteLine();
             outputProvider.WriteLine($"{name}'s Hand");
+            outputProvider.WriteLine();
 
             foreach (ICard card in hand.Cards)
             {
@@ -497,9 +500,11 @@ namespace Blackjack
             Console.ForegroundColor = ConsoleColor.White;
 
             outputProvider.WriteLine();
-            outputProvider.Write($"{name}'s Points: {player.PlayerHands[0].GetTotalValue()}");
+            outputProvider.WriteLine($"{name}'s Points: {player.PlayerHands[0].GetTotalValue()}");
             outputProvider.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             outputProvider.WriteLine(border);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         /// <summary>
@@ -509,6 +514,8 @@ namespace Blackjack
         /// <param name="dealer">The dealer</param>
         public void RenderWholeTable()
         {
+            Console.Clear();
+
             if (Console.OutputEncoding != Encoding.Unicode)
             {
                 Console.OutputEncoding = Encoding.Unicode;

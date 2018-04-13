@@ -170,7 +170,7 @@ namespace Blackjack
 
                 playTurn();
 
-                showDealerHand();
+               // showDealerHand();
                 tableRenderer.RenderWholeTable();
 
                 while (dealer.PlayerHands[0].GetTotalValue() < Constant.DEALERMINHANDVALUE)
@@ -203,9 +203,10 @@ namespace Blackjack
                 }
             }
 
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             outputProvider.WriteLine(tableRenderer.Generate('$'));
+            Console.ForegroundColor = ConsoleColor.White;
             outputProvider.WriteLine("Thanks for Playing the Game!");
-
         }
 
         private void playTurn()
