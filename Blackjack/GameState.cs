@@ -8,12 +8,10 @@ namespace Blackjack
 {
     public enum GameState
     {
-        WaitingToStart,
-        Started,
+        InGame,
         WaitingForUserInput,
         PerformingMove,
-        GameOver,
-        InGame,
+        GameOver, 
         Push,
         Winner,
         BlackJack

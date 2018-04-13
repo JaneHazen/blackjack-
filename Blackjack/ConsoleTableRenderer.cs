@@ -243,23 +243,25 @@ namespace Blackjack
         {
 
             Console.WriteLine("--------------------------------Player Details-------------------------------------------");
-
+          
+            Console.WriteLine();
             var players = this.Table.Players;
 
             foreach (var player in players)
             {
-                var playerePoint = player.PlayerHands[0].GetTotalValue();
+                var playerPoint = player.PlayerHands[0].GetTotalValue();
                 var playerCards = player.PlayerHands[0].Cards;
-
-                Console.WriteLine($"Player Name: {player.Name}");
-                Console.WriteLine($"Player Points: {playerePoint}");
+              
+                Console.WriteLine($"Player: {player}");
+                Console.WriteLine($"Player Points: {playerPoint}");
                 Console.WriteLine("----- Player Hand -------");
                 foreach (ICard card in playerCards)
                 {
                     Console.WriteLine(card);
                 }
-
-                Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+              
+                Console.WriteLine();
+                
             }
         }
         public void TempRenderDealerTable()
