@@ -68,7 +68,7 @@ namespace Blackjack.Tests
         //    // act
         //    var actual0 = tableRenderer.Generate('*');
         //    var actual1 = tableRenderer.Generate('A');
-            
+
         //    // assert
         //    Assert.AreEqual(expected0, actual0);
         //    Assert.AreEqual(expected1, actual1);

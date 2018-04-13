@@ -103,9 +103,9 @@ namespace Blackjack
         /// </summary>
         private void createPlayersForTable()
         {
-            outputProvider.Write($"How many players: ");
+            outputProvider.Write("How many players: ");
             var numsPlayer = 1;
-            Int32.TryParse(inputProvider.Read(), out numsPlayer);
+            int.TryParse(inputProvider.Read(), out numsPlayer);
 
             if(numsPlayer <= 0)
             {
@@ -148,6 +148,7 @@ namespace Blackjack
         /// </summary>
         public void StartGame()
         {
+            Console.Clear();
             outputProvider.WriteLine();
             welcomeMessage();
             outputProvider.WriteLine();
@@ -166,18 +167,18 @@ namespace Blackjack
                 updatePlayerGameStateForTheFirstTwoCard();
 
                 tableRenderer.Table = table;
-                tableRenderer.Render();
+                tableRenderer.RenderWholeTable();
 
                 playTurn();
 
-                showDealerHand();
-                tableRenderer.Render();
+               // showDealerHand();
+                tableRenderer.RenderWholeTable();
 
                 while (dealer.PlayerHands[0].GetTotalValue() < Constant.DEALERMINHANDVALUE)
                 {
                     //TODO may need a delay
                     dealer.Draw(deck, Constant.DRAW_ONE);
-                    tableRenderer.Render();
+                    tableRenderer.RenderWholeTable();
                 }
                 updatePlayerGameState(dealer);
 
@@ -190,7 +191,7 @@ namespace Blackjack
                     updateWinDealerAgainstPlayer();
                 }
 
-                tableRenderer.Render();
+                tableRenderer.RenderWholeTable();
 
                 outputProvider.WriteLine();
                 outputProvider.WriteLine("Do you want to play one more round? Y/N");
@@ -199,12 +200,15 @@ namespace Blackjack
 
                 if(result.Contains("N") || result.Contains("n"))
                 {
+                    Console.Clear();
                     break;
                 }
             }
-             
-            outputProvider.WriteLine("***Thanks for Playing the Game********");
 
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            outputProvider.WriteLine(tableRenderer.Generate('$'));
+            Console.ForegroundColor = ConsoleColor.White;
+            outputProvider.WriteLine("Thanks for Playing the Game!");
         }
 
         private void playTurn()
@@ -222,6 +226,7 @@ namespace Blackjack
                         outputProvider.Write(actionType);
                         outputProvider.Write(" ");
                     }
+
                     outputProvider.WriteLine();
                     action = player.GetAction(moveProvider);
 
@@ -229,7 +234,7 @@ namespace Blackjack
                     {
                         player.Draw(deck, Constant.DRAW_ONE);
                         updatePlayerGameState(player);
-                        tableRenderer.Render();
+                        tableRenderer.RenderWholeTable();
                     }
 
                     if (player.gameState == GameState.GameOver)
@@ -282,7 +287,13 @@ namespace Blackjack
 
         private void welcomeMessage()
         {
-            outputProvider.WriteLine("***************Welcome to Black Jack Where you lose all Your Money*****************");
+            Console.ForegroundColor = ConsoleColor.Green;
+            outputProvider.Write(tableRenderer.Generate('$'));
+            Console.ForegroundColor = ConsoleColor.White;
+            outputProvider.WriteLine("Welcome to Black Jack, where you lose all your money");
+            Console.ForegroundColor = ConsoleColor.Green;
+            outputProvider.WriteLine(tableRenderer.Generate('$'));
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         private void updatePlayerGameState(IPlayer player)
@@ -361,6 +372,7 @@ namespace Blackjack
                 player.Draw(deck, 2);
             }
             dealer.Draw(deck, 2);
+            //dealer.PlayerHands[0].Cards[1].IsHidden = true;
         }
     }
 }
