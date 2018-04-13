@@ -31,9 +31,7 @@ namespace Blackjack.Interfaces
         /// Our main rendering method, for drawing the player's cards and points
         /// </summary>
         /// <param name="player"></param>
-        /// <param points>Only exists bc waiting to get IHand code with a points
-        /// member...</param>
-        void RenderHandAndPoints(IPlayer player, int points);
+        void RenderHandAndPoints(IPlayer player);
 
         /// <summary>
         /// Renders a 2-D array -- "rendering" strings or 1-D arrays is for
@@ -71,13 +69,6 @@ namespace Blackjack.Interfaces
         String Generate(Char border);
 
         /// <summary>
-        /// A general method for rendering ASCII
-        /// </summary>
-        /// <param name="graphic">A 2-D array representing the graphic</param>
-        /// <returns>A colored 2-D string array representing the graphic</returns>
-        Graphic Generate(int[][] graphic);
-
-        /// <summary>
         /// A method for rendering the whole table, with all players and the dealer
         /// </summary>
         /// <param name="players">A collection of *active* players to render</param>
@@ -87,7 +78,7 @@ namespace Blackjack.Interfaces
         /// <param name="dealerPoints"> The dealer's points       
         /// *** --->>> Once hands have a points member REMOVE</param>
 
-        void RenderWholeTable(IEnumerable<IPlayer> players, IEnumerable<int> playerPoints, IPlayer dealer, int dealerPoints);
+        void RenderWholeTable();
     }
 
 }

@@ -45,7 +45,7 @@ namespace Blackjack
             Suit = suit;
             Rank = rank;
             Value = value;
-            IsHidden = true;
+            IsHidden = false;
         }
         /// <summary>
         /// Just for testing purpose
