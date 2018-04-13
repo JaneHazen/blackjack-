@@ -152,7 +152,7 @@ namespace Blackjack
             welcomeMessage();
             outputProvider.WriteLine();
 
-            for (var round = 1; round < 2; round++)
+            for (var round = 1; round <= 2; round++)
             {
                 deck = new BlackJackDeck();
                 deck.Shuffle();
