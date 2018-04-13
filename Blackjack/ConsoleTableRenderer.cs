@@ -233,7 +233,7 @@ namespace Blackjack
         {
             var t = Task.Run(async delegate
             {
-                await Task.Delay(TimeSpan.FromSeconds(2));
+                await Task.Delay(TimeSpan.FromSeconds(1));
                 TempRenderPlayerHands();
             });
             t.Wait();
@@ -251,10 +251,11 @@ namespace Blackjack
             {
                 var playerPoint = player.PlayerHands[0].GetTotalValue();
                 var playerCards = player.PlayerHands[0].Cards;
-              
+
+                Console.WriteLine("----- Player Hand -------");
                 Console.WriteLine($"Player: {player}");
                 Console.WriteLine($"Player Points: {playerPoint}");
-                Console.WriteLine("----- Player Hand -------");
+               
                 foreach (ICard card in playerCards)
                 {
                     Console.WriteLine(card);
@@ -271,14 +272,48 @@ namespace Blackjack
                 var dealer = this.Table.Dealer;
                 //Dealer points only show the value of one
                 //var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
-                var dealerPoint = dealer.PlayerHands[0].Cards[0].Value;
+                
+
+                bool showOneCard = true;                
+                foreach (var card in dealer.PlayerHands[0].Cards)
+                {
+                    if (!card.IsHidden)
+                    {
+                        showOneCard = false;
+                        break;
+
+                    }
+                    
+                }
+
+                int dealerPoint = dealer.PlayerHands[0].Cards[0].Value;
                 var dealerCards = dealer.PlayerHands[0].Cards;
-                await Task.Delay(TimeSpan.FromSeconds(2));
-                Console.WriteLine($"Dealer Name: {dealer.Name}");
-                Console.WriteLine($"Dealer Points: {dealerPoint}");
+
+                await Task.Delay(TimeSpan.FromSeconds(1));
+                Console.WriteLine();
                 Console.WriteLine("----- Dealer Hand -------");
+                Console.WriteLine($"Dealer Name: {dealer.Name}");
+                if (showOneCard)
+                {
+                    Console.WriteLine($"Dealer Points: {dealerPoint}");
+                    Console.WriteLine(dealerCards[0]);
+                }
+                else
+                {
+                    dealerPoint = dealer.PlayerHands[0].GetTotalValue();
+                    Console.WriteLine($"Dealer Points: {dealerPoint}");
+                    foreach (ICard card in dealerCards)
+                    {
+                        Console.WriteLine(card);
+                    }
+                }
+
+
+                Console.WriteLine();
+
+
                 //Rendering dealer card
-                Console.WriteLine(dealerCards[0].ToString());
+
                 return; 
             });
             t.Wait();
