@@ -11,8 +11,14 @@ namespace Blackjack
     {
         
         public BlackjackDealer(): base("Adam The Dealer")
-        {             
+        {  
             
+        }
+
+        public override string ToString()
+        {
+            return "";
+
         }
 
     }

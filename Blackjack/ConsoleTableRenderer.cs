@@ -34,7 +34,7 @@ namespace Blackjack
 
             if (card.IsHidden)
             {
-                for (int i = 0; i <= bitmap.Length; i++)
+                for (int i = 0; i < bitmap.Length; i++)
                 {
                     bitmap[i] = new int[] { 7,7,7,7,7,7,7,7,7 };
                 }
@@ -236,11 +236,26 @@ namespace Blackjack
             // many sins will be committed
             // please don't smite me bill
 
-            var graphic = Generate(card);
-
             Console.BackgroundColor = ConsoleColor.White;
 
+            if (card.IsHidden)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine("         ");
+                }
+
+                Console.WriteLine();
+
+                return;
+            }
+
+            var graphic = Generate(card);
+
             var pic = graphic.Bitmap;
+
 
             for (int i = 0; i < pic.Length; i++)
             {
@@ -500,7 +515,8 @@ namespace Blackjack
             Console.ForegroundColor = ConsoleColor.White;
 
             outputProvider.WriteLine();
-            outputProvider.WriteLine($"{name}'s Points: {player.PlayerHands[0].GetTotalValue()}");
+            outputProvider.WriteLine($"{name}'s Points: {player.PlayerHands[0].GetTotalValue() - player.PlayerHands[0].GetTotalHiddenValue()}");
+            outputProvider.WriteLine($"{player}");
             outputProvider.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
             outputProvider.WriteLine(border);
