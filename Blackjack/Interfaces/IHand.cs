@@ -16,5 +16,7 @@ namespace Blackjack.Interfaces
         // adds a card to the hand
         void AddCard(ICard card);
 
+        int GetTotalHiddenValue();
+
     }
 }

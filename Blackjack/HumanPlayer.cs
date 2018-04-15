@@ -76,9 +76,17 @@ namespace Blackjack
             }
             this.Name = name;
             this.PlayerHands = new List<IHand>();
-            //will need to add cards from new instance of hand concrete class
+
         }
 
+        public override string ToString()
+        {
+            string status = this.gameState.ToString();
+            string formatedName = $"{Name.Substring(0, 1).ToUpper()}{Name.Substring(1, Name.Length - 1).ToLower()}";
+            string playerStatus = formatedName + " Game status: " + status;
+            return playerStatus;
+
+        }
 
     }
 }

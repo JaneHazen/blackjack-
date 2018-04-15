@@ -83,6 +83,7 @@ namespace Blackjack.Tests
             var pickedCardFromDeck = deck.Cards[6];
 
             //act
+            
             deck.Shuffle();
             var pickedCardFromShuffledDeck = deck.Cards[6];
 

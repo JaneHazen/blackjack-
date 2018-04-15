@@ -14,7 +14,7 @@ namespace Blackjack.Tests
             var expectedSuit = CardSuit.Club;
             var expectedRank = CardRank.King;
             var expectedValue = 10;
-            var expectedIsHidden = true;
+            var expectedIsHidden = false;
             var value = 10;
 
             //Act 

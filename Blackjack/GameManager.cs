@@ -1,4 +1,5 @@
-﻿using Blackjack.Interfaces;
+﻿using Blackjack.Exceptions;
+using Blackjack.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,9 +104,9 @@ namespace Blackjack
         /// </summary>
         private void createPlayersForTable()
         {
-            outputProvider.Write($"How many players: ");
+            outputProvider.Write("How many players: ");
             var numsPlayer = 1;
-            Int32.TryParse(inputProvider.Read(), out numsPlayer);
+            int.TryParse(inputProvider.Read(), out numsPlayer);
 
             if(numsPlayer <= 0)
             {
@@ -148,26 +149,99 @@ namespace Blackjack
         /// </summary>
         public void StartGame()
         {
+            Console.Clear();
+            outputProvider.WriteLine();
             welcomeMessage();
+            outputProvider.WriteLine();
 
-            createDealerForTable();
+            for (var round = 1; round <= 2; round++)
+            {
+                deck = new BlackJackDeck();
+                deck.Shuffle();
 
-            createPlayersForTable();
+                createDealerForTable();
 
-            DealFristTwoCards();
+                createPlayersForTable();
 
-            updatePlayerGameStateForTheFirstTwoCard();
+                DealFristTwoCards();
 
-            tableRenderer.Table = table;
-            tableRenderer.Render();
+                updatePlayerGameStateForTheFirstTwoCard();
 
-           
-            foreach(var player in players)  
+                tableRenderer.Table = table;
+                tableRenderer.RenderWholeTable();
+
+                playTurn();
+
+                showDealerHand();
+                tableRenderer.RenderWholeTable();
+
+                //Check if Any Player is in the game then force the Dealer to draw if neeed
+                if (checkIfAnyPlayerIsInGame())
+                {
+
+                    while (dealer.PlayerHands[0].GetTotalValue() < Constant.DEALERMINHANDVALUE)
+                    {
+                        //TODO may need a delay
+                        dealer.Draw(deck, Constant.DRAW_ONE);
+                        tableRenderer.RenderWholeTable();
+                    }
+                }
+
+                updatePlayerGameState(dealer);
+
+                if (dealer.PlayerHands[0].GetTotalValue() > Constant.BLACKJACK)
+                {
+                    updateWinWhenDealerBusted();
+                }
+                else
+                {
+                    updateWinDealerAgainstPlayer();
+                }
+
+                tableRenderer.RenderWholeTable();
+
+                outputProvider.WriteLine();
+                outputProvider.WriteLine("Do you want to play one more round? Y/N");
+
+                var result = inputProvider.Read();
+
+                if(result.Contains("N") || result.Contains("n"))
+                {
+                    Console.Clear();
+                    break;
+                }
+            }
+
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            outputProvider.WriteLine(tableRenderer.Generate('$'));
+            Console.ForegroundColor = ConsoleColor.White;
+            outputProvider.WriteLine("Thanks for Playing the Game!");
+        }
+
+        private bool checkIfAnyPlayerIsInGame()
+        {
+            
+            foreach (var player in players)
+            {
+
+                if (player.gameState != GameState.GameOver)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void playTurn()
+        {
+            foreach (var player in players)
             {
                 PlayerAction action = PlayerAction.hit;
 
                 do
                 {
+                    outputProvider.WriteLine($"{player.Name}  Your Points: {player.PlayerHands[0].GetTotalValue()}");
                     outputProvider.WriteLine($"{player.Name}  enter one of the following options: ");
 
                     foreach (var actionType in Enum.GetNames(typeof(PlayerAction)))
@@ -175,14 +249,25 @@ namespace Blackjack
                         outputProvider.Write(actionType);
                         outputProvider.Write(" ");
                     }
+
+                    
+
                     outputProvider.WriteLine();
-                    action = player.GetAction(moveProvider);
+                    try
+                    {
+                        action = player.GetAction(moveProvider);
+                    }
+                    catch (InvalidInputException)
+                    {
+                        continue;
+
+                    }
 
                     if (action == PlayerAction.hit)
                     {
                         player.Draw(deck, Constant.DRAW_ONE);
                         updatePlayerGameState(player);
-                        tableRenderer.Render();
+                        tableRenderer.RenderWholeTable();
                     }
 
                     if (player.gameState == GameState.GameOver)
@@ -206,28 +291,6 @@ namespace Blackjack
                 //if stand return 
                 // go the next player.
             }
-
-            showDealerHand();
-            tableRenderer.Render();
-            
-            while(dealer.PlayerHands[0].GetTotalValue() < Constant.DEALERMINHANDVALUE)
-            {
-                //TODO may need a delay
-                dealer.Draw(deck, Constant.DRAW_ONE);
-                tableRenderer.Render();
-            }
-            updatePlayerGameState(dealer);
-
-            if(dealer.PlayerHands[0].GetTotalValue() > Constant.BLACKJACK)
-            {
-                updateWinWhenDealerBusted();
-            }
-            else
-            {
-                updateWinDealerAgainstPlayer();
-            }
-            
-            
         }
 
         private void showDealerHand()
@@ -257,7 +320,13 @@ namespace Blackjack
 
         private void welcomeMessage()
         {
-            outputProvider.WriteLine("***************Welcome to Black Jack Where you lose all Your Money*****************");
+            Console.ForegroundColor = ConsoleColor.Green;
+            outputProvider.WriteLine(tableRenderer.Generate('$'));
+            Console.ForegroundColor = ConsoleColor.White;
+            outputProvider.WriteLine("Welcome to Black Jack, where you lose all your money");
+            Console.ForegroundColor = ConsoleColor.Green;
+            outputProvider.WriteLine(tableRenderer.Generate('$'));
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         private void updatePlayerGameState(IPlayer player)
@@ -288,6 +357,8 @@ namespace Blackjack
                 {
                     var playerHandTotal = player.PlayerHands[0].GetTotalValue();
 
+                    player.gameState = GameState.GameOver;
+
                     if (playerHandTotal > dealHandTotal)
                     {
                         player.gameState = GameState.Winner;
@@ -297,10 +368,7 @@ namespace Blackjack
                     {
                         player.gameState = GameState.Push;
                     }
-                    else
-                    {
-                        player.gameState = GameState.GameOver;
-                    }
+                   
                 }
             }
         }
@@ -337,6 +405,7 @@ namespace Blackjack
                 player.Draw(deck, 2);
             }
             dealer.Draw(deck, 2);
+            dealer.PlayerHands[0].Cards[1].IsHidden = true;
         }
     }
 }

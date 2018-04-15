@@ -34,7 +34,7 @@ namespace Blackjack
 
             if (card.IsHidden)
             {
-                for (int i = 0; i <= 9; i++)
+                for (int i = 0; i < bitmap.Length; i++)
                 {
                     bitmap[i] = new int[] { 7,7,7,7,7,7,7,7,7 };
                 }
@@ -46,7 +46,7 @@ namespace Blackjack
 
             // If the card is face up, find out its color...
 
-            int c; // c is for color
+            int c = 0; // c is for color
 
             if (card.Suit == CardSuit.Club || card.Suit == CardSuit.Spade)
             {
@@ -66,6 +66,7 @@ namespace Blackjack
 
             // ...and figure out where the rest of the spots go...
 
+            var array0 = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
             var array1 = new int[] { 1,1,1,1,c,1,1,1,1 };
             var array2 = new int[] { 1,1,c,1,1,1,c,1,1 };
             var array3 = new int[] { 1,1,1,c,1,c,1,1,1 };
@@ -73,6 +74,30 @@ namespace Blackjack
 
             switch (card.Rank)
             {
+                case CardRank.Ace:
+                    bitmap[3] = array0;
+                    bitmap[4] = array1;
+                    bitmap[5] = array0;
+                    bitmap[6] = array0;
+                    break;
+                case CardRank.Jack:
+                    bitmap[3] = array0;
+                    bitmap[4] = array1;
+                    bitmap[5] = array0;
+                    bitmap[6] = array0;
+                    break;
+                case CardRank.Queen:
+                    bitmap[3] = array0;
+                    bitmap[4] = array1;
+                    bitmap[5] = array0;
+                    bitmap[6] = array0;
+                    break;
+                case CardRank.King:
+                    bitmap[3] = array0;
+                    bitmap[4] = array1;
+                    bitmap[5] = array0;
+                    bitmap[6] = array0;
+                    break;
                 case CardRank.Ten:
                     bitmap[3] = array4;
                     bitmap[4] = array4;
@@ -83,41 +108,50 @@ namespace Blackjack
                     bitmap[3] = array4;
                     bitmap[4] = array4;
                     bitmap[5] = array4;
+                    bitmap[6] = array0;
                     break;
                 case CardRank.Eight:
                     bitmap[3] = array4;
                     bitmap[4] = array2;
                     bitmap[5] = array4;
+                    bitmap[6] = array0;
                     break;
                 case CardRank.Seven:
                     bitmap[3] = array2;
                     bitmap[4] = array4;
                     bitmap[5] = array2;
+                    bitmap[6] = array0;
                     break;
                 case CardRank.Six:
                     bitmap[3] = array2;
                     bitmap[4] = array3;
                     bitmap[5] = array2;
+                    bitmap[6] = array0;
                     break;
                 case CardRank.Five:
                     bitmap[3] = array2;
                     bitmap[4] = array1;
                     bitmap[5] = array2;
+                    bitmap[6] = array0;
                     break;
                 case CardRank.Four:
                     bitmap[3] = array2;
+                    bitmap[4] = array0;
                     bitmap[5] = array2;
+                    bitmap[6] = array0;
                     break;
                 case CardRank.Three:
                     bitmap[3] = array1;
                     bitmap[4] = array1;
                     bitmap[5] = array1;
+                    bitmap[6] = array0;
                     break;
                 case CardRank.Two:
                     bitmap[3] = array1;
+                    bitmap[4] = array0;
                     bitmap[5] = array1;
+                    bitmap[6] = array0;
                     break;
-                // if we have an ace or a face card, put only one spot in the center
                 default:
                     bitmap[4] = array1;
                     break;
@@ -127,8 +161,8 @@ namespace Blackjack
 
             for (int i = 0; i < bitmap.Length; i++)
             {
-                if (bitmap[i].Length == 0) {
-                    bitmap[i] = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, };
+                if (bitmap[i] == null || bitmap[i].Length == 0) {
+                    bitmap[i] = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
                 }
             }
 
@@ -148,16 +182,6 @@ namespace Blackjack
             var horizontalRule = String.Concat(Enumerable.Repeat(border, length));
 
             return horizontalRule;
-        }
-
-        /// <summary>
-        /// Generates a graphic from a 2D array. Really just a wrapper for the
-        /// graphic constructer
-        /// </summary>
-        /// <param name="graphic"></param>
-        public Graphic Generate(int[][] graphic)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -206,11 +230,160 @@ namespace Blackjack
             throw new NotImplementedException();
         }
 
+        public void Render(ICard card)
+        {
+            // we are going to be hacky to get this done on time
+            // many sins will be committed
+            // please don't smite me bill
+
+            Console.BackgroundColor = ConsoleColor.White;
+
+            if (card.IsHidden)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine("         ");
+                }
+
+                Console.WriteLine();
+
+                return;
+            }
+
+            var graphic = Generate(card);
+
+            var pic = graphic.Bitmap;
+
+
+            for (int i = 0; i < pic.Length; i++)
+            {
+                var row = pic[i];
+
+                if (card.Suit == CardSuit.Heart || card.Suit == CardSuit.Diamond)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Black;
+                }
+
+                char suitSymbol;
+
+                switch (card.Suit)
+                {
+                    case CardSuit.Spade:
+                        suitSymbol = '\u2660';
+                        break;
+                    case CardSuit.Club:
+                        suitSymbol = '\u2663';
+                        break;
+                    case CardSuit.Heart:
+                        suitSymbol = '\u2665';
+                        break;
+                    case CardSuit.Diamond:
+                        suitSymbol = '\u2666';
+                        break;
+                    default:
+                        suitSymbol = ' ';
+                        break;
+                }
+
+                if (i == 0)
+                {
+                    var digit = card.Rank;
+
+                    if ((int)digit == 1)
+                    {
+                        Console.Write("A");
+                    }
+                    else if ((int)digit <= 9)
+                    {
+                        Console.Write((int)digit);
+                    }
+                    else
+                    {
+                       if (digit == CardRank.Ten)
+                        {
+                            Console.Write(10);
+                        }
+                       else
+                        {
+                            Console.Write(digit.ToString().Substring(0, 1).ToUpper());
+                        }
+                    }
+
+                    if (digit != CardRank.Ten)
+                    {
+                        Console.Write(suitSymbol);
+                    }
+
+                    Console.WriteLine("       ");
+                } 
+                else if (i == 9)
+                {
+                    Console.Write("       ");
+
+                    var digit = card.Rank;
+
+                    if (digit != CardRank.Ten)
+                    {
+                        Console.Write(suitSymbol);
+                    }
+
+                    if ((int)digit == 1)
+                    {
+                        Console.WriteLine("A");
+                    }
+                    else if ((int)digit <= 9)
+                    {
+                        Console.WriteLine((int)digit);
+                    }
+
+                    else
+                    {
+                        if (digit == CardRank.Ten)
+                        {
+                            Console.WriteLine(10);
+                        }
+                        else
+                        {
+                            Console.WriteLine(digit.ToString().Substring(0, 1).ToUpper());
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (int element in row)
+                    {
+                       if (element == 0 || element == 7)
+                        {
+                            Console.Write(suitSymbol);
+                        }
+                       else
+                        {
+                            Console.Write(" ");
+                        }
+                    }
+
+                    Console.WriteLine();
+                }
+            }
+        }
+
         public void Render()
         {
-            var dealer = this.Table.Dealer;
-            var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
-            RenderHandAndPoints(this.Table.Dealer, dealerPoint);
+
+            TempRenderDealerTable();
+            TimeDelay();
+
+
+
+            //TODO replace later with graphic version
+
+            //RenderHandAndPoints(this.Table.Dealer, dealerPoint);
         }
 
         /// <summary>
@@ -221,69 +394,163 @@ namespace Blackjack
         /// ***! ----->>> Once we have the full code
         /// for IHand, we won't need this argument bc hands will have 
         /// points associated with them!</param>
-        public void RenderHandAndPoints(IPlayer player, int points)
+        /// 
+
+        public void TimeDelay()
+        {
+            var t = Task.Run(async delegate
+            {
+                await Task.Delay(TimeSpan.FromSeconds(3));
+            });
+            t.Wait();
+        }
+
+        public void TempRenderPlayerHands()
+        {
+
+            Console.WriteLine("--------------------------------Player Details-------------------------------------------");
+          
+            Console.WriteLine();
+            var players = this.Table.Players;
+
+            foreach (var player in players)
+            {
+                var playerPoint = player.PlayerHands[0].GetTotalValue();
+                var playerCards = player.PlayerHands[0].Cards;
+
+                Console.WriteLine("----- Player Hand -------");
+                Console.WriteLine($"Player: {player}");
+                Console.WriteLine($"Player Points: {playerPoint}");
+               
+                foreach (ICard card in playerCards)
+                {
+                    Console.WriteLine(card);
+                }
+              
+                Console.WriteLine();
+                
+            }
+        }
+        public void TempRenderDealerTable()
+        {
+            var t = Task.Run(async delegate
+            {
+                var dealer = this.Table.Dealer;
+                //Dealer points only show the value of one
+                //var dealerPoint = dealer.PlayerHands[0].GetTotalValue();
+                
+
+                bool showOneCard = true;                
+                foreach (var card in dealer.PlayerHands[0].Cards)
+                {
+                    if (!card.IsHidden)
+                    {
+                        showOneCard = false;
+                        break;
+
+                    }
+                    
+                }
+
+                int dealerPoint = dealer.PlayerHands[0].Cards[0].Value;
+                var dealerCards = dealer.PlayerHands[0].Cards;
+
+                await Task.Delay(TimeSpan.FromSeconds(1));
+                Console.WriteLine();
+                Console.WriteLine("----- Dealer Hand -------");
+                Console.WriteLine($"Dealer Name: {dealer.Name}");
+                if (showOneCard)
+                {
+                    Console.WriteLine($"Dealer Points: {dealerPoint}");
+                    Console.WriteLine(dealerCards[0]);
+                }
+                else
+                {
+                    dealerPoint = dealer.PlayerHands[0].GetTotalValue();
+                    Console.WriteLine($"Dealer Points: {dealerPoint}");
+                    foreach (ICard card in dealerCards)
+                    {
+                        Console.WriteLine(card);
+                    }
+                }
+
+
+                Console.WriteLine();
+
+
+                //Rendering dealer card
+
+                return; 
+            });
+            t.Wait();
+        }
+
+        public void RenderHandAndPoints(IPlayer player)
         {
             var hand = player.PlayerHands[0];
             // This complicated bullshit is just capitalizing the first letter of the player's name
+
             var name = $"{player.Name.Substring(0, 1).ToUpper()}{player.Name.Substring(1, player.Name.Length - 1).ToLower()}";
 
             IOutputProvider outputProvider = new ConsoleOutputProvider();
 
-            var border = Generate('*');
+            outputProvider.WriteLine();
 
+            var border = Generate('$');
+
+            Console.ForegroundColor = ConsoleColor.Green;
             outputProvider.WriteLine(border);
+            Console.ForegroundColor = ConsoleColor.White;
             outputProvider.WriteLine();
             outputProvider.WriteLine($"{name}'s Hand");
+            outputProvider.WriteLine();
 
             foreach (ICard card in hand.Cards)
             {
-                var cardGraphic = Generate(card);
-                Render(cardGraphic);
-                // This creates a 2 character-wide space between cards in the hand
-                outputProvider.Write("  ");
+                Render(card);
+                Console.WriteLine();
             }
 
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+
             outputProvider.WriteLine();
-            outputProvider.Write($"{name}'s Points: {points}");
+            outputProvider.WriteLine($"{name}'s Points: {player.PlayerHands[0].GetTotalValue() - player.PlayerHands[0].GetTotalHiddenValue()}");
+            outputProvider.WriteLine($"{player}");
             outputProvider.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             outputProvider.WriteLine(border);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         /// <summary>
         /// A method for rendering the whole table, with all players and the dealer
         /// </summary>
         /// <param name="players">A collection of *active* players to render</param>
-        /// <param name="playerPoints">A collection listing all the player's points.
-        /// *** --->>> Once hands have a points member REMOVE</param>
         /// <param name="dealer">The dealer</param>
-        /// <param name="dealerPoints"> The dealer's points       
-        /// *** --->>> Once hands have a points member REMOVE</param>
-        public void RenderWholeTable(IEnumerable<IPlayer> players, IEnumerable<int> playerPoints, IPlayer dealer, int dealerPoints)
+        public void RenderWholeTable()
         {
+            Console.Clear();
+
+            if (Console.OutputEncoding != Encoding.Unicode)
+            {
+                Console.OutputEncoding = Encoding.Unicode;
+            }
+
             // This holds all the players, including the dealer, for the caller's
             // convenience
             List<IPlayer> allTogetherNow = new List<IPlayer>();
 
-            allTogetherNow = players.Select(x => x).ToList();
-            allTogetherNow.Add(dealer);
-
-            // This holds all the points. We only only only have it because we're
-            // waiting on IHand to have a points member added. Once we get that,
-            // we can call the points from the player's hand
-            List<int> allThePoints = new List<int>();
-
-            allThePoints = playerPoints.Select(x => x).ToList();
-            allThePoints.Add(dealerPoints);
+            allTogetherNow = Table.Players.Select(x => x).ToList();
+            allTogetherNow.Add(Table.Dealer);
 
             for (int i = 0; i < allTogetherNow.Count; i++)
             {
                 var player = allTogetherNow[i];
-                var points = allThePoints[i];
 
-                RenderHandAndPoints(player, points);
+                RenderHandAndPoints(player);
+                TimeDelay();
             }
         }
-
-
     }
 }
